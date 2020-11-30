@@ -48,11 +48,11 @@ int Blue::getCardsPerCoin(int coins) {
 }
 
 string Blue::getName() {
-	return typeid(this).name();
+	return "Blue";
 }
 
 void Blue::print(ostream& out) const {
-	out.write(typeid(this).name(), 1);
+	out.write("B", 1);
 }
 
 //#######  Chili Card Start ###############################################
@@ -66,11 +66,11 @@ int Chili::getCardsPerCoin(int coins) {
 }
 
 string Chili::getName() {
-	return typeid(this).name();
+	return "Chili";
 }
 
 void Chili::print(ostream& out) const {
-	out.write(typeid(this).name(), 1);
+	out.write("C", 1);
 }
 
 //######## Stink Card Start ###############################################
@@ -84,11 +84,11 @@ int Stink::getCardsPerCoin(int coins) {
 }
 
 string Stink::getName() {
-	return typeid(this).name();
+	return "Stink";
 }
 
 void Stink::print(ostream& out) const {
-	out.write(typeid(this).name(), 1);
+	out.write("S", 1);
 }
 
 //######### Green Card Start ##############################################
@@ -102,11 +102,11 @@ int Green::getCardsPerCoin(int coins) {
 }
 
 string Green::getName() {
-	return typeid(this).name();
+	return "Green";
 }
 
 void Green::print(ostream& out) const {
-	out.write(typeid(this).name(), 1);
+	out.write("G", 1);
 }
 
 //######### Soy Card Start ################################################
@@ -120,12 +120,11 @@ int Soy::getCardsPerCoin(int coins) {
 }
 
 string Soy::getName() {
-	return typeid(this).name();
+	return "Soy";
 }
 
 void Soy::print(ostream& out) const {
-	char lowerFirst = tolower((typeid(this).name())[0]);
-	out.write(&lowerFirst, 1);
+	out.write("s", 1);
 }
 
 //########## Black Card Start #############################################
@@ -139,12 +138,11 @@ int Black::getCardsPerCoin(int coins) {
 }
 
 string Black::getName() {
-	return typeid(this).name();
+	return "Black";
 }
 
 void Black::print(ostream& out) const {
-	char lowerFirst = tolower((typeid(this).name())[0]);
-	out.write(&lowerFirst, 1);
+	out.write("b", 1);
 }
 
 //########## Red Card Start ###############################################
@@ -158,11 +156,11 @@ int Red::getCardsPerCoin(int coins) {
 }
 
 string Red::getName() {
-	return typeid(this).name();
+	return "Red";
 }
 
 void Red::print(ostream& out) const {
-	out.write(typeid(this).name(), 1);
+	out.write("R", 1);
 }
 
 //########### Garden Card Start #############################################
@@ -174,10 +172,9 @@ int Garden::getCardsPerCoin(int coins) {
 }
 
 string Garden::getName() {
-	return typeid(this).name();
+	return "Garden";
 }
 
 void Garden::print(ostream& out) const {
-	char lowerFirst = tolower((typeid(this).name())[0]);
-	out.write(&lowerFirst, 1);
+	out.write("g", 1);
 }
