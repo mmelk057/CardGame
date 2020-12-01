@@ -34,7 +34,7 @@ the DiscardPile, as well as the TradeArea.
 TradeArea class will have to hold cards openly and support random access insertion and removal.
 ```
 - [ ] Coins
-- [ ] Hand (2%)
+- [x] Hand (2%)
 ```
 Hand is well mapped by a queue since players have to keep their hand in order and 
 the first card drawn is the first card played. The only derivation form this pattern 

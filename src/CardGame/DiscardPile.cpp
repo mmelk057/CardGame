@@ -1,5 +1,6 @@
 #include "DiscardPile.h"
 #include <fstream>
+#include <cstdio>
 
 
 const std::string DiscardPile::fileName = "DiscardPile.txt";
@@ -56,7 +57,7 @@ Saves the save of a DiscardPile
 */
 void DiscardPile::saveState() {
 	std::ofstream outFile;
-	outFile.open(getFileName(), std::ofstream::out | std::ofstream::trunc);
+	outFile.open(fileName, std::ofstream::out | std::ofstream::trunc);
 	for (Card* c : pile) {
 		outFile << c->getFirst() << std::endl;
 	}
@@ -68,13 +69,17 @@ Recover previous DiscardPile state (if possible)
 */
 DiscardPile DiscardPile::recoverState() {
 	std::ifstream inFile;
-	inFile.open(getFileName(), std::ifstream::in);
+	inFile.open(fileName, std::ifstream::in);
 	if (!inFile) {
 		//If the file cannot be opened, that implies that there is no previous
 		//State to recover to - create a new DiscardPile
 		return DiscardPile{};
 	}
-	return DiscardPile{ inFile, CardFactory::getFactory() };
+	inFile.close();
+	DiscardPile p = DiscardPile{ inFile, CardFactory::getFactory() };
+	//Remove previous state file
+	std::remove(fileName.c_str());
+	return p;
 }
 
 
