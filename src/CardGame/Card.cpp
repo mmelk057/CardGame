@@ -31,14 +31,14 @@ int fetchCoinsPerCard(const std::map<int, int>& value_mappings, int coins) {
 }
 
 /* Non-member function impl of left-shift operator to stream Card class */
-inline std::ostream& operator << (ostream& os, const Card& c) {
+inline std::ostream& operator << (std::ostream& os, const Card& c) {
 	c.print(os);
 	return os;
 }
 
 
 //######   Blue Card Start  ##############################################
-int Blue::getCardsPerCoin(int coins) {
+int Blue::getCardsPerCoin(int coins) const {
 	std::map<int, int> coinsToCards;
 	coinsToCards[1] = 4;
 	coinsToCards[2] = 6;
@@ -47,16 +47,20 @@ int Blue::getCardsPerCoin(int coins) {
 	return fetchCoinsPerCard(coinsToCards, coins);
 }
 
-string Blue::getName() {
+std::string Blue::getName() const {
 	return "Blue";
 }
 
-void Blue::print(ostream& out) const {
-	out.write("B", 1);
+char Blue::getFirst() const {
+	return 'B';
+}
+
+void Blue::print(std::ostream& out) const {
+	out.put(getFirst());
 }
 
 //#######  Chili Card Start ###############################################
-int Chili::getCardsPerCoin(int coins) {
+int Chili::getCardsPerCoin(int coins) const {
 	std::map<int, int> coinsToCards;
 	coinsToCards[1] = 3;
 	coinsToCards[2] = 6;
@@ -65,16 +69,20 @@ int Chili::getCardsPerCoin(int coins) {
 	return fetchCoinsPerCard(coinsToCards, coins);
 }
 
-string Chili::getName() {
+std::string Chili::getName() const {
 	return "Chili";
 }
 
-void Chili::print(ostream& out) const {
-	out.write("C", 1);
+char Chili::getFirst() const {
+	return 'C';
+}
+
+void Chili::print(std::ostream& out) const {
+	out.put(getFirst());
 }
 
 //######## Stink Card Start ###############################################
-int Stink::getCardsPerCoin(int coins) {
+int Stink::getCardsPerCoin(int coins) const {
 	std::map<int, int> coinsToCards;
 	coinsToCards[1] = 3;
 	coinsToCards[2] = 5;
@@ -83,16 +91,20 @@ int Stink::getCardsPerCoin(int coins) {
 	return fetchCoinsPerCard(coinsToCards, coins);
 }
 
-string Stink::getName() {
+std::string Stink::getName() const {
 	return "Stink";
 }
 
-void Stink::print(ostream& out) const {
-	out.write("S", 1);
+char Stink::getFirst() const {
+	return 'S';
+}
+
+void Stink::print(std::ostream& out) const {
+	out.put(getFirst());
 }
 
 //######### Green Card Start ##############################################
-int Green::getCardsPerCoin(int coins) {
+int Green::getCardsPerCoin(int coins) const {
 	std::map<int, int> coinsToCards;
 	coinsToCards[1] = 3;
 	coinsToCards[2] = 5;
@@ -101,16 +113,20 @@ int Green::getCardsPerCoin(int coins) {
 	return fetchCoinsPerCard(coinsToCards, coins);
 }
 
-string Green::getName() {
+std::string Green::getName() const {
 	return "Green";
 }
 
-void Green::print(ostream& out) const {
-	out.write("G", 1);
+char Green::getFirst() const {
+	return 'G';
+}
+
+void Green::print(std::ostream& out) const {
+	out.put(getFirst());
 }
 
 //######### Soy Card Start ################################################
-int Soy::getCardsPerCoin(int coins) {
+int Soy::getCardsPerCoin(int coins) const {
 	std::map<int, int> coinsToCards;
 	coinsToCards[1] = 2;
 	coinsToCards[2] = 4;
@@ -119,16 +135,20 @@ int Soy::getCardsPerCoin(int coins) {
 	return fetchCoinsPerCard(coinsToCards, coins);
 }
 
-string Soy::getName() {
+std::string Soy::getName() const {
 	return "Soy";
 }
 
-void Soy::print(ostream& out) const {
-	out.write("s", 1);
+char Soy::getFirst() const {
+	return 's';
+}
+
+void Soy::print(std::ostream& out) const {
+	out.put(getFirst());
 }
 
 //########## Black Card Start #############################################
-int Black::getCardsPerCoin(int coins) {
+int Black::getCardsPerCoin(int coins) const {
 	std::map<int, int> coinsToCards;
 	coinsToCards[1] = 2;
 	coinsToCards[2] = 4;
@@ -137,16 +157,20 @@ int Black::getCardsPerCoin(int coins) {
 	return fetchCoinsPerCard(coinsToCards, coins);
 }
 
-string Black::getName() {
+std::string Black::getName() const {
 	return "Black";
 }
 
-void Black::print(ostream& out) const {
-	out.write("b", 1);
+char Black::getFirst() const {
+	return 'b';
+}
+
+void Black::print(std::ostream& out) const {
+	out.put(getFirst());
 }
 
 //########## Red Card Start ###############################################
-int Red::getCardsPerCoin(int coins) {
+int Red::getCardsPerCoin(int coins) const {
 	std::map<int, int> coinsToCards;
 	coinsToCards[1] = 2;
 	coinsToCards[2] = 3;
@@ -155,26 +179,34 @@ int Red::getCardsPerCoin(int coins) {
 	return fetchCoinsPerCard(coinsToCards, coins);
 }
 
-string Red::getName() {
+std::string Red::getName() const {
 	return "Red";
 }
 
-void Red::print(ostream& out) const {
-	out.write("R", 1);
+char Red::getFirst() const {
+	return 'R';
+}
+
+void Red::print(std::ostream& out) const {
+	out.put(getFirst());
 }
 
 //########### Garden Card Start #############################################
-int Garden::getCardsPerCoin(int coins) {
+int Garden::getCardsPerCoin(int coins) const {
 	std::map<int, int> coinsToCards;
 	coinsToCards[2] = 2;
 	coinsToCards[3] = 3;
 	return fetchCoinsPerCard(coinsToCards, coins);
 }
 
-string Garden::getName() {
+std::string Garden::getName() const{
 	return "Garden";
 }
 
-void Garden::print(ostream& out) const {
-	out.write("g", 1);
+char Garden::getFirst() const {
+	return 'g';
+}
+
+void Garden::print(std::ostream& out) const {
+	out.put(getFirst());
 }
