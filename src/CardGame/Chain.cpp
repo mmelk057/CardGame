@@ -1,9 +1,11 @@
 #include "Chain.h"
 
+using namespace std;
 
-
-Chain::Chain()
+template <typename T>
+Chain::Chain(istream& is, const CardFactory* cf)
 {
+	
 }
 
 
