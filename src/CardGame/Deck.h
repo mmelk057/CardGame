@@ -22,10 +22,9 @@ class Deck: private std::vector<Card*> {
 	public:
 		friend std::ostream& operator<< (std::ostream& os, const Deck& d);
 
-		using CardList::pop_back;
 		using CardList::size;
 		using CardList::empty;
-		using CardList::back;
+		using CardList::front;
 
 		Card* draw();
 
