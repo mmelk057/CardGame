@@ -32,7 +32,7 @@ class Card {
 		virtual char getFirst() const = 0;
 		
 		Card() = default;
-		~Card() = default;
+		virtual ~Card() = default;
 	
 		//A card cannot copy, nor assign itself to another Card.
 		//The CardFactory is responsible for doing this..
@@ -48,6 +48,7 @@ class Blue : public virtual Card {
 		int getCardsPerCoin(int coins) const;
 		std::string getName() const;
 		char getFirst() const;
+		~Blue() = default;
 	protected:
 		void print(std::ostream& out) const;
 };
@@ -57,6 +58,7 @@ class Chili : public virtual Card {
 		int getCardsPerCoin(int coins) const;
 		std::string getName() const;
 		char getFirst() const;
+		~Chili() = default;
 	protected:
 		void print(std::ostream& out) const;
 };
@@ -66,6 +68,7 @@ class Stink : public virtual Card {
 		int getCardsPerCoin(int coins) const;
 		std::string getName() const;
 		char getFirst() const;
+		~Stink() = default;
 	protected:
 		void print(std::ostream& out) const;
 };
@@ -75,6 +78,7 @@ class Green : public virtual Card {
 		int getCardsPerCoin(int coins) const;
 		std::string getName() const;
 		char getFirst() const;
+		~Green() = default;
 	protected:
 		void print(std::ostream& out) const;
 };
@@ -84,6 +88,7 @@ class Soy : public virtual Card {
 		int getCardsPerCoin(int coins) const;
 		std::string getName() const;
 		char getFirst() const;
+		~Soy() = default;
 	protected:
 		void print(std::ostream& out) const;
 };
@@ -93,6 +98,7 @@ class Black : public virtual Card {
 		int getCardsPerCoin(int coins) const;
 		std::string getName() const;
 		char getFirst() const;
+		~Black() = default;
 	protected:
 		void print(std::ostream& out) const;
 };
@@ -102,6 +108,7 @@ class Red : public virtual Card {
 		int getCardsPerCoin(int coins) const;
 		std::string getName() const;
 		char getFirst() const;
+		~Red() = default;
 	protected:
 		void print(std::ostream& out) const;
 };
@@ -111,6 +118,7 @@ class Garden : public virtual Card {
 		int getCardsPerCoin(int coins) const;
 		std::string getName() const;
 		char getFirst() const;
+		~Garden() = default;
 	protected:
 		void print(std::ostream& out) const;
 };

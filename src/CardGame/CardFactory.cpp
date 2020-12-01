@@ -90,9 +90,7 @@ CardFactory::~CardFactory() {
 	cardLst.clear();
 	//Destroys unique Card pointer instances from cardMapping
 	for (auto it = cardMapping.begin(); it != cardMapping.end(); it++) {
-		std::cout << "DELETING " << it->second->getName();
-		
-		//TODO: Figure out why this won't delete properly
+		std::cout << "DELETING " << it->second->getName() << std::endl;
 		Card* toDelete = it->second;
 		delete toDelete;
 	}

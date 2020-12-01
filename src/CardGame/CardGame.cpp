@@ -8,7 +8,7 @@
 
 int main()
 {
-	std::cout << CardFactory::getFactory() << std::endl;
-	std::cout << CardFactory::getFactory();
+	CardFactory* cf = CardFactory::getFactory();
+	delete cf;
 	return 1;
 }
