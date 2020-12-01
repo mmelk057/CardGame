@@ -31,7 +31,7 @@ int fetchCoinsPerCard(const std::map<int, int>& value_mappings, int coins) {
 }
 
 /* Non-member function impl of left-shift operator to stream Card class */
-inline std::ostream& operator << (std::ostream& os, const Card& c) {
+std::ostream& operator<< (std::ostream& os, const Card& c) {
 	c.print(os);
 	return os;
 }

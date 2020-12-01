@@ -1,10 +1,15 @@
 #include "CardFactory.h"
+#include "Deck.h"
 #include <fstream>
+
 
 CardFactory* CardFactory::cf = nullptr;
 
-void CardFactory::populateList(int amt, Card* c) {
-	for (int i = 0; i < amt; i++) {
+/*
+Populate a cardLst with duplicate Card pointer entries, n amount of times.
+*/
+void CardFactory::populateList(int n, Card* c) {
+	for (int i = 0; i < n; i++) {
 		cardLst.push_back(c);
 	}
 }
@@ -58,6 +63,7 @@ ie. Stink = S
 	Blue = B
 	Soy = s
 	...
+If a Card cannot be mapped to the character, returns NULLPTR
 */
 Card* CardFactory::getCard(char abbr) const {
 	auto currentPos = cardMapping.find(abbr);
@@ -68,6 +74,10 @@ Card* CardFactory::getCard(char abbr) const {
 	}
 }
 
+/*
+Fetches the Singleton CardFactory instance. If it does not exist, create a new one,
+otherwise, fetch the existing one.
+*/
 CardFactory* CardFactory::getFactory() {
 	if (cf == nullptr) {
 		cf = new CardFactory();
@@ -77,24 +87,31 @@ CardFactory* CardFactory::getFactory() {
 }
 
 CardFactory::~CardFactory() {
+	//Destroys unique Card pointer instances from cardMapping
 	for (auto it = cardMapping.begin(); it != cardMapping.end(); it++) {
 		delete it->second;
 	}
 }
 
-//Deck CardFactory::getDeck() {
-//	std::shuffle(cardLst.begin(), cardLst.end(), defaultRandomEng);
+Deck CardFactory::getDeck() {
+	//Randomly shuffle deck
+	std::shuffle(cardLst.begin(), cardLst.end(), defaultRandomEng);
 	
-//	std::ofstream outFile;
-//	outFile.open(getFileName(), std::ofstream::trunc);
-	//Stream the current contents of the shuffled card list into a file
-//	for (Card* c : cardLst) {
-//		outFile << c->getFirst() << std::endl;
-//	}
-//	outFile.close();
+	//Since Deck's only constructor requires reading from an istream,
+	//the intuition here is to store the abbreviations of each card in 
+	//the shuffled list into a file for the deck to inevitably read
+	std::ofstream outFile;
+	outFile.open(getFileName(), std::ofstream::trunc);
+	for (Card* c : cardLst) {
+		outFile << c->getFirst() << std::endl;
+	}
+	outFile.close();
  
-//	std::ifstream inFile{ getFileName(), std::ifstream::in };
-//	return Deck{ inFile, this };
-//}
+	//Create an ifstream instance of the file we recently populated and
+	//construct a Deck instance
+	std::ifstream inFile { getFileName(), std::ifstream::in };
+	Deck generatedDeck { inFile, this };
+	return generatedDeck;
+}
 
 

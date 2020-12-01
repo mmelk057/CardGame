@@ -13,17 +13,31 @@
 class CardFactory;
 
 class Card {
-	friend class CardFactory;
 	public:
 		friend std::ostream& operator << (std::ostream& os, const Card& c);
+	
+		/*
+		Fetches the amount of cards needed to obtain n amount of coins
+		*/
 		virtual int getCardsPerCoin(int coins) const = 0;
+		
+		/*
+		Fetches the full class name
+		*/
 		virtual std::string getName() const = 0;
+		
+		/*
+		Fetches the abbreviated version of the class
+		*/
 		virtual char getFirst() const = 0;
+		
 		Card() = default;
+	
 		//A card cannot copy, nor assign itself to another Card.
 		//The CardFactory is responsible for doing this..
 		Card(const Card&) = delete;
 		void operator=(const Card&) = delete;
+	
 	protected:
 		virtual void print(std::ostream& out) const  = 0;
 };

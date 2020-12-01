@@ -17,18 +17,20 @@ class CardFactory;
 class Deck: private std::vector<Card*> {
 	private:
 		typedef std::vector<Card*> CardList;
+		
 		void display(std::ostream&) const;
-	
 	public:
+		friend std::ostream& operator<< (std::ostream& os, const Deck& d);
+
 		using CardList::pop_back;
 		using CardList::size;
 		using CardList::empty;
 		using CardList::back;
 
-		friend std::ostream& operator<< (std::ostream& os, const Deck& d);
-		Deck(std::istream& is, const CardFactory* cf);
 		Card* draw();
-		~Deck();
+
+		Deck(std::istream& is, const CardFactory* cf);
+		~Deck() = default;
 };
 
 #endif
