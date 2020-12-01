@@ -32,6 +32,7 @@ class Card {
 		virtual char getFirst() const = 0;
 		
 		Card() = default;
+		~Card() = default;
 	
 		//A card cannot copy, nor assign itself to another Card.
 		//The CardFactory is responsible for doing this..

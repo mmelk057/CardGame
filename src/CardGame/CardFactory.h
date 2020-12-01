@@ -39,13 +39,14 @@ class CardFactory
 		static CardFactory* cf;
 
 		//This file will be used to build new decks
-		std::string fileName = "CardFactoryState.txt";
+		const std::string fileName = "CardFactoryState.txt";
 	
 	public:
 		Deck getDeck();
 		std::string getFileName() const {
 			return fileName;
 		}
+
 		static CardFactory* getFactory();
 		Card* getCard(char abbr) const;
 		~CardFactory();

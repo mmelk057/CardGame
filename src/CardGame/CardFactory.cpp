@@ -87,9 +87,14 @@ CardFactory* CardFactory::getFactory() {
 }
 
 CardFactory::~CardFactory() {
+	cardLst.clear();
 	//Destroys unique Card pointer instances from cardMapping
 	for (auto it = cardMapping.begin(); it != cardMapping.end(); it++) {
-		delete it->second;
+		std::cout << "DELETING " << it->second->getName();
+		
+		//TODO: Figure out why this won't delete properly
+		Card* toDelete = it->second;
+		delete toDelete;
 	}
 }
 

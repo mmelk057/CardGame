@@ -7,6 +7,7 @@
 
 #include <iostream>
 #include <vector>
+#include <string>
 #include "Cards.h"
 #include "CardFactory.h"
 
@@ -17,12 +18,23 @@ class DiscardPile
 	private:
 		std::vector<Card*> pile{};
 		void print(std::ostream&) const;
+		
+		void saveState();
+		static const std::string fileName;
+
 	public:
 		friend std::ostream& operator<< (std::ostream&, const DiscardPile&);
 
 		Card* pickUp();
 		Card* top() const;
 
+		static std::string getFileName() {
+			return fileName;
+		}
+
+		static DiscardPile recoverState();
+ 
+		DiscardPile() = default;
 		DiscardPile(std::istream&, const CardFactory*);
 		DiscardPile& operator+= (Card*);
 		~DiscardPile() = default;

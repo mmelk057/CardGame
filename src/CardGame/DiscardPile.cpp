@@ -1,5 +1,8 @@
 #include "DiscardPile.h"
+#include <fstream>
 
+
+const std::string DiscardPile::fileName = "DiscardPile.txt";
 
 DiscardPile::DiscardPile(std::istream& is, const CardFactory* factory) {
 	char character;
@@ -46,6 +49,32 @@ Returns the top card from the DiscardPile
 */
 Card* DiscardPile::top() const {
 	return pile.front();
+}
+
+/*
+Saves the save of a DiscardPile
+*/
+void DiscardPile::saveState() {
+	std::ofstream outFile;
+	outFile.open(getFileName(), std::ofstream::out | std::ofstream::trunc);
+	for (Card* c : pile) {
+		outFile << c->getFirst() << std::endl;
+	}
+	outFile.close();
+}
+
+/*
+Recover previous DiscardPile state (if possible)
+*/
+DiscardPile DiscardPile::recoverState() {
+	std::ifstream inFile;
+	inFile.open(getFileName(), std::ifstream::in);
+	if (!inFile) {
+		//If the file cannot be opened, that implies that there is no previous
+		//State to recover to - create a new DiscardPile
+		return DiscardPile{};
+	}
+	return DiscardPile{ inFile, CardFactory::getFactory() };
 }
 
 

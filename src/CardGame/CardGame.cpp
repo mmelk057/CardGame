@@ -8,5 +8,7 @@
 
 int main()
 {
+	std::cout << CardFactory::getFactory() << std::endl;
+	std::cout << CardFactory::getFactory();
 	return 1;
 }
