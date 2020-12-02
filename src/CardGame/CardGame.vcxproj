@@ -165,6 +165,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CardFactory.h" />
+    <ClInclude Include="CardGame.h" />
     <ClInclude Include="Chain.h" />
     <ClInclude Include="Coins.h" />
     <ClInclude Include="Deck.h" />

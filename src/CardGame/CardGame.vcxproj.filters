@@ -83,6 +83,9 @@
     <ClInclude Include="CardFactory.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="CardGame.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Cards.h">
