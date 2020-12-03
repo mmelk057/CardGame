@@ -3,6 +3,7 @@
 #include "CardFactory.h"
 #include "Hand.h"
 #include "Chain.h"
+#include "TradeArea.h"
 #include <iostream>
 #include <map> 
 #include <climits>
@@ -12,19 +13,24 @@ int main()
 {
 	//Testing
 	CardFactory* cf = CardFactory::getFactory();
-	Chain<Green> a = Chain<Green>(cin, cf);
+	TradeArea a = TradeArea(cin, cf);
 	Green* green = new Green();
-	Card* c = green;
+	Red* red = new Red();
+	Card* cg = green;
+	Card* cr = red;
 	try {
-		for (int i = 0; i < 8; i++) {
-			a += green;
-			cout << a << endl;
-			//cout<<a.sell()<<endl;
-		}
+		/*for (int i = 0; i < 6; i++) {
+			a += cg;
+			a += red;
+		}*/
+		a += cg;
+		a += cg;
+		a += red;
 	}
 	catch(char* e){
 		cout << e<<endl;
 	}
+	cout << a;
 	return 0;
 	Deck d = cf->getDeck();
 	Hand h{};

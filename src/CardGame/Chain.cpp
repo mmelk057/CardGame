@@ -14,10 +14,10 @@ Chain<T>& Chain<T>::operator+=(Card* c){
 	T* temp = dynamic_cast<T*> (c);
 	if (temp) {
 		cards.push_back(temp);
-		cout<<temp->getName();
 		Card* card = cards.front();
 		if (cards.size()>=card->getCardsPerCoin(4)) {
-			cout << sell();
+			//Sell chain
+			int s = sell();
 		}
 	}
 	else

@@ -1,5 +1,4 @@
 #pragma once
-#include <iostream>
 #include "Cards.h"
 #include "CardFactory.h"
 using namespace std;
