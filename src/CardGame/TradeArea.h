@@ -8,7 +8,7 @@ class TradeArea
 public:
 	TradeArea(istream&, const CardFactory*);
 	TradeArea& operator+=(Card*);
-	bool legal(Card*);
+	bool legal(Card*) const;
 	Card* trade(string);
 	int numCards() const;
 

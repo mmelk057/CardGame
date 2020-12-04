@@ -11,7 +11,7 @@ TradeArea & TradeArea::operator+=(Card * c)
 	return *this;
 }
 
-bool TradeArea::legal(Card * c)
+bool TradeArea::legal(Card * c) const
 {
 	bool flag = false;
 	int first3 = 0;

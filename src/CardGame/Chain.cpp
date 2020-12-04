@@ -40,6 +40,13 @@ int Chain<T>::sell() const{
 	return 0;
 }
 
+template<typename T>
+ostream& Chain<T>::insertString(ostream & os) const
+{
+	os << *this;
+	return os;
+}
+
 template class Chain<Blue>;
 template class Chain<Chili>;
 template class Chain<Stink>;

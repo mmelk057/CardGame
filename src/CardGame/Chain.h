@@ -3,13 +3,18 @@
 #include "CardFactory.h"
 using namespace std;
 
-template <typename T>
+class Chain_base {
+public:
+	virtual ostream& insertString(ostream & os) const {
+		return os;
+	}
+	friend ostream& operator<<(ostream& os, const Chain_base& cb) {
+		return cb.insertString(os);
+	}
+};
 
-//class Chain_base {
-//public:
-//
-//};
-class Chain
+template <typename T>
+class Chain : public Chain_base
 {
 private:
 	vector<T*> cards;
@@ -17,7 +22,6 @@ public:
 	Chain(istream&, const CardFactory*);
 	Chain<T>& operator+=(Card*);
 	int sell() const;
-	//friend ostream& operator<<(ostream&, const Chain&);
 	friend ostream & operator<<(ostream & os, const Chain<T>& c)
 	{
 		int len = c.cards.size();
@@ -33,5 +37,6 @@ public:
 		}
 		return os;
 	}
+	ostream& insertString(ostream & os) const;
 	~Chain() = default;
 };
