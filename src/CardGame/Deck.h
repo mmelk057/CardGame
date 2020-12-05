@@ -27,7 +27,7 @@ class Deck: private std::vector<Card*> {
 		using CardList::front;
 
 		Card* draw();
-
+		Deck() = default;
 		Deck(std::istream& is, const CardFactory* cf);
 		~Deck() = default;
 };

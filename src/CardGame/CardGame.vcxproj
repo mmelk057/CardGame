@@ -155,7 +155,6 @@
     <ClCompile Include="CardFactory.cpp" />
     <ClCompile Include="CardGame.cpp" />
     <ClCompile Include="Chain.cpp" />
-    <ClCompile Include="Coins.cpp" />
     <ClCompile Include="Deck.cpp" />
     <ClCompile Include="DiscardPile.cpp" />
     <ClCompile Include="Hand.cpp" />
@@ -167,7 +166,6 @@
     <ClInclude Include="CardFactory.h" />
     <ClInclude Include="CardGame.h" />
     <ClInclude Include="Chain.h" />
-    <ClInclude Include="Coins.h" />
     <ClInclude Include="Deck.h" />
     <ClInclude Include="DiscardPile.h" />
     <ClInclude Include="Hand.h" />

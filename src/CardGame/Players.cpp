@@ -78,13 +78,13 @@ void Players::addChain(Chain_base* cb)
 	chains.push_back(cb);
 }
 
-void Players::printHand(std::ostream & os, bool toOS)
+void Players::printHand(std::ostream & os, bool wholeHand)
 {
 	//Verify method
-	if (toOS) {
+	if (wholeHand) {
 		os << hand;
 	}
 	else {
-		cout << hand.top();
+		os << hand.top();
 	}
 }

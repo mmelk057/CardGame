@@ -14,7 +14,7 @@ public:
 
 	friend ostream & operator<<(ostream & os, TradeArea ta);
 	
-
+	TradeArea() = default;
 	~TradeArea() = default;
 private:
 	list<Card*> cards;
