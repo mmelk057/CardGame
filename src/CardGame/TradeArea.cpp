@@ -1,23 +1,30 @@
 #include "TradeArea.h"
 
-TradeArea::TradeArea(istream & is , const CardFactory * cf)
-{
-	//TODO Construct Trade Area
+std::ostream & operator<<(std::ostream & os, const TradeArea& tradeArea) {
+	bool flag = false;
+	for (Card* const& i : tradeArea.cards) {
+		if (flag) {
+			os << " ";
+		}
+		else {
+			flag = true;
+		}
+		os << i->getName();
+	}
+	return os;
 }
 
-TradeArea & TradeArea::operator+=(Card * c)
-{
+TradeArea& TradeArea::operator+= (Card* c) {
 	cards.push_back(c);
 	return *this;
 }
 
-bool TradeArea::legal(Card * c) const
-{
+bool TradeArea::legal(Card * c) const {
 	bool flag = false;
 	int first3 = 0;
 
 	for (Card* const& i : cards) {
-		if (c->getName().compare(i->getName()) == 0) {
+		if ( (c->getName()).compare(i->getName()) == 0 ) {
 			flag = true;
 			break;
 		}
@@ -29,52 +36,32 @@ bool TradeArea::legal(Card * c) const
 	return flag;
 }
 
-
-Card * TradeArea::trade(string s)
-{
+Card* TradeArea::trade(std::string s) {
 	Card* flag = nullptr;
-	list<Card*>::iterator iter = cards.begin();
+	std::list<Card*>::iterator iter = cards.begin();
 
 	for (iter; iter != cards.end(); iter++) {
-		if ((*iter)->getName().compare(s)==0) {
+		if ( ((*iter)->getName()).compare(s) == 0 ) {
 			flag = *iter;
 			break;
 		}
 	}
-
 	if (flag!=nullptr) {
 		cards.erase(iter);
 	}
 	return flag;
 }
 
-int TradeArea::numCards() const
-{
-	return cards.size();
+int TradeArea::numCards() const {
+	return static_cast<int>(cards.size());
 }
-
-vector<string> TradeArea::getUnique()
+std::vector<std::string> TradeArea::getUnique()
 {
-	list<Card*>::iterator ip;
-	ip = unique(cards.begin(), cards.end());
-	vector<string> unique;
+	std::list<Card*>::iterator ip;
+	ip = std::unique(cards.begin(), cards.end());
+	std::vector<std::string> unique;
 	for (Card* const c : cards) {
 
 	}
 	return ();
-}
-
-ostream & operator<<(ostream & os, TradeArea ta)
-{
-	bool flag = false;
-	for (Card* const& i : ta.cards) {
-		if (flag) {
-			os << " ";
-		}
-		else {
-			flag = true;
-		}
-		os << i->getName();
-	}
-	return os;
 }

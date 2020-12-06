@@ -1,23 +1,46 @@
+#ifndef TABLE_H
+#define TABLE_H
+
+#ifdef _MSC_VER
 #pragma once
-#include "Players.h"
+#endif _MSC_VER
+
+
+#include <iostream>
+#include <string>
+#include "CardFactory.h"
+#include "Player.h"
 #include "TradeArea.h"
 #include "DiscardPile.h"
 #include "Deck.h"
 
-class Table
-{
-public:
-	Table(istream&, const CardFactory*);
-	Table(string, string, CardFactory*);
-	bool win(std::string&) const;
-	void printHand(bool)const;
-	friend ostream & operator<<(ostream &, Table);
-	Table() = default;
-	~Table() = default;
-	Players* p1;
-	Players* p2;
-	Deck deck;
-	DiscardPile discardPile;
-	TradeArea tradeArea;
+class Table {
+	private:
+		DiscardPile discardPile{};
+		TradeArea tradeArea{};
+		Deck deck{};
+		Player player1{};
+		Player player2{};
+
+	public:
+		Table(std::istream&, const CardFactory*);
+		Table(std::string, std::string, CardFactory*);
+		bool win(std::string&) const;
+		void printHand(bool) const;
+		friend std::ostream & operator<<(std::ostream &, const Table&);
+
+		Player& getPlayerOne() { return player1; }
+
+		Player& getPlayerTwo() { return player2; }
+
+		Deck& getDeck() { return deck; }
+
+		TradeArea& getTradeArea() { return tradeArea; }
+
+		DiscardPile& getDiscardPile() { return discardPile; }
+
+		Table() = default;
+		~Table() = default;
 };
 
+#endif

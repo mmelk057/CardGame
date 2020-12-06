@@ -158,23 +158,22 @@
     <ClCompile Include="Deck.cpp" />
     <ClCompile Include="DiscardPile.cpp" />
     <ClCompile Include="Hand.cpp" />
-    <ClCompile Include="Players.cpp" />
+    <ClCompile Include="Loader.cpp" />
+    <ClCompile Include="Player.cpp" />
+    <ClCompile Include="Recovery.cpp" />
     <ClCompile Include="Table.cpp" />
     <ClCompile Include="TradeArea.cpp" />
-    <ClCompile Include="UserChoice.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CardFactory.h" />
-    <ClInclude Include="CardGame.h" />
     <ClInclude Include="Chain.h" />
     <ClInclude Include="Deck.h" />
     <ClInclude Include="DiscardPile.h" />
     <ClInclude Include="Hand.h" />
-    <ClInclude Include="Players.h" />
-    <ClInclude Include="resource.h" />
+    <ClInclude Include="Loader.h" />
+    <ClInclude Include="Player.h" />
     <ClInclude Include="Table.h" />
     <ClInclude Include="TradeArea.h" />
-    <ClInclude Include="UserChoice.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Cards.h" />

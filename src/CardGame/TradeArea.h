@@ -1,22 +1,29 @@
+#ifndef TRADEAREA_H
+#define TRADEAREA_H
+
+#ifdef _MSC_VER
 #pragma once
+#endif _MSC_VER
+
+#include <list>
+#include <iostream>
+#include <string>
 #include "Cards.h"
 #include "CardFactory.h"
-#include <list>
-using namespace std;
-class TradeArea
-{
-public:
-	TradeArea(istream&, const CardFactory*);
-	TradeArea& operator+=(Card*);
-	bool legal(Card*) const;
-	Card* trade(string);
-	int numCards() const;
-	vector<string> getUnique();
-	friend ostream & operator<<(ostream & os, TradeArea ta);
-	
-	TradeArea() = default;
-	~TradeArea() = default;
-private:
-	list<Card*> cards;
+
+class TradeArea {
+	public:
+		TradeArea(std::istream&, const CardFactory*);
+		TradeArea& operator+=(Card*);
+		bool legal(Card*) const;
+		Card* trade(std::string);
+		int numCards() const;
+		vector<string> getUnique();
+		friend std::ostream & operator<<(std::ostream&, const TradeArea&);
+		TradeArea() = default;
+		~TradeArea() = default;
+	private:
+		std::list<Card*> cards{};
 };
 
+#endif
