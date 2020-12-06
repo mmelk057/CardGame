@@ -18,7 +18,7 @@ class TradeArea {
 		bool legal(Card*) const;
 		Card* trade(std::string);
 		int numCards() const;
-		vector<string> getUnique();
+		std::list<std::string> getUnique();
 		friend std::ostream & operator<<(std::ostream&, const TradeArea&);
 		TradeArea() = default;
 		~TradeArea() = default;

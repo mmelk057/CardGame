@@ -15,10 +15,19 @@
 #include "Hand.h"
 #include "Chain.h"
 
-std::vector<ChainBase*> recoverChains(std::istream& is, const CardFactory* cf);
-void recoverCard(std::istream&, const CardFactory*, std::list<Card*>&);
-void recoverCard(std::istream&, const CardFactory*, std::vector<Card*>&);
-void recoverCard(std::istream& is, const CardFactory* factory, std::queue<Card*, std::list<Card*>>& queue);
+std::vector<ChainBase*> recoverChains(std::istream & is, const CardFactory * cf)
+{
+	return std::vector<ChainBase*>();
+}
+void recoverCard(std::istream&, const CardFactory*, std::list<Card*>&) {
+
+}
+void recoverCard(std::istream&, const CardFactory*, std::vector<Card*>&) {
+
+}
+void recoverCard(std::istream& is, const CardFactory* factory, std::queue<Card*, std::list<Card*>>& queue) {
+
+}
 
 /*
 * On Init, the loader should fetch the previous state of the game
@@ -108,3 +117,5 @@ DiscardPile::DiscardPile(std::istream& is, const CardFactory* factory) {
 TradeArea::TradeArea(std::istream& is, const CardFactory* cf) {
 	recoverCard(is, cf, cards);
 }
+
+

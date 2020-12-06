@@ -1,5 +1,6 @@
 #include "TradeArea.h"
 
+
 std::ostream & operator<<(std::ostream & os, const TradeArea& tradeArea) {
 	bool flag = false;
 	for (Card* const& i : tradeArea.cards) {
@@ -55,13 +56,13 @@ Card* TradeArea::trade(std::string s) {
 int TradeArea::numCards() const {
 	return static_cast<int>(cards.size());
 }
-std::vector<std::string> TradeArea::getUnique()
+std::list<std::string> TradeArea::getUnique()
 {
-	std::list<Card*>::iterator ip;
-	ip = std::unique(cards.begin(), cards.end());
-	std::vector<std::string> unique;
-	for (Card* const c : cards) {
-
+	std::list<Card*> unique = cards;
+	unique.unique();
+	std::list<std::string> uniqueStrings;
+	for (Card* const c : unique) {
+		uniqueStrings.push_back(c->getName());
 	}
-	return ();
+	return uniqueStrings;
 }

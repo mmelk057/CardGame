@@ -77,7 +77,12 @@ int main()
 					choice = 0;
 					
 					while (choice != 1) {
-						UserChoice
+						std::cout << table.getTradeArea()<< std::endl;
+						std::list<std::string> options = table.getTradeArea().getUnique();
+						std::vector<std::string> v{ options.begin(), options.end() };
+						options.push_front("Done trading");
+						choice = UserChoice(v);
+						std::cout << table.getTradeArea() << std::endl;
 					}
 				}
 				else {
