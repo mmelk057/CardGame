@@ -44,8 +44,7 @@ int main()
 	int choice = UserChoice({ "New game", "Load game from file" });
 	Table table;
 	if (choice == 1) {
-		std::string name1;
-		std::string name2;
+		std::string name1,name2;
 		std::cout << "Enter player name 1" << std::endl;
 		std::cin >> name1;
 		std::cout << "Enter player name 2" << std::endl;

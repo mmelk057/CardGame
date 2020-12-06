@@ -158,6 +158,7 @@
     <ClCompile Include="Deck.cpp" />
     <ClCompile Include="DiscardPile.cpp" />
     <ClCompile Include="Hand.cpp" />
+    <ClCompile Include="Loader.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Table.cpp" />
     <ClCompile Include="TradeArea.cpp" />

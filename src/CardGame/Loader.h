@@ -10,14 +10,14 @@
 
 class Loader {
 	private:
-		const std::string fileName = "SavedFile.txt";
+		const std::string fileName = "SavedState.txt";
 		Table table;
 	public: 
 
 		/*
 		* When a new loader object is created, the state of game should be reloaded from a file
 		*/
-		Loader();
+		Loader(std::string, std::string);
 
 		/*
 		* When the loader object calls the desctructor, the state of the game should save
@@ -27,9 +27,7 @@ class Loader {
 		/*
 		Returns a built table
 		*/
-		Table& getTable() {
-			return table;
-		}
+		Table& getTable() { return table; }
 };
 
 #endif

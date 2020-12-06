@@ -1,22 +1,5 @@
 #include "Deck.h"
 
-
-Deck::Deck(std::istream& is, const CardFactory* cf) {
-	char character;
-	while (is.get(character)) {
-		if (character != '\n') {
-			Card* currentCard = cf->getCard(character);
-			if (currentCard == nullptr) {
-				std::cout << std::endl << "INVALID Character ['" << character << "']" << std::endl;
-			}
-			else {
-				this->push_back(currentCard);
-			}
-		}
-	}
-}
-
-
 std::ostream& operator<< (std::ostream& os, const Deck& d) {
 	d.display(os);
 	return os;

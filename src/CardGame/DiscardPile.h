@@ -16,7 +16,7 @@ class Card;
 class DiscardPile
 {
 	private:
-		std::vector<Card*> pile{};
+		std::vector<Card*> pile {};
 		void print(std::ostream&) const;
 		static const std::string fileName;
 	public:
@@ -26,8 +26,8 @@ class DiscardPile
 		Card* top() const;
 
 		//######## These methods ensure DiscardPile state is recovered if previously saved ######
-		void saveState();
-		static DiscardPile recoverState();
+		//void saveState();
+		//static DiscardPile recoverState();
 		//#######################################################################################	
 
 		DiscardPile() = default;
