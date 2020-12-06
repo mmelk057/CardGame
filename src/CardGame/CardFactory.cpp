@@ -96,7 +96,7 @@ CardFactory::~CardFactory() {
 	}
 }
 
-Deck CardFactory::getDeck() {
+Deck CardFactory::getDeck(){
 	//Randomly shuffle deck
 	std::shuffle(cardLst.begin(), cardLst.end(), defaultRandomEng);
 	

@@ -20,6 +20,7 @@ public:
 	void printHand(std::ostream&, bool);
 	friend ostream & operator<<(ostream &, Players);
 	void addChain(Chain_base*);
+	void addCard(Card*);
 	~Players() = default;
 private:
 	int coins;

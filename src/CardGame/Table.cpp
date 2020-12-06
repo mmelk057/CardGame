@@ -2,14 +2,23 @@
 
 Table::Table(istream & is, const CardFactory *cf)
 {
-	p1 = new Players(string("p1"));
-	p2 = new Players(string("p2"));
-	deck = Deck(is, cf);
-	discardPile = DiscardPile();
-	tradeArea = TradeArea(is,cf);
+	
 }
 
-bool Table::win(std::string & winner)
+Table::Table(string p1Name, string p2Name, CardFactory *cf)
+{
+	p1 = new Players(p1Name);
+	p2 = new Players(p2Name);
+	deck = cf->getDeck();
+	discardPile = DiscardPile();
+	tradeArea = TradeArea();
+	for (int i = 0; i < 5; i++) {
+		p1->addCard(deck.draw());
+		p2->addCard(deck.draw());
+	}
+}
+
+bool Table::win(std::string & winner)const
 {
 	bool done = deck.size() == 0;
 	if (done) {
@@ -28,7 +37,7 @@ bool Table::win(std::string & winner)
 	return done;
 }
 
-void Table::printHand(bool wholeHand)
+void Table::printHand(bool wholeHand) const
 {
 	cout << p1->getName()<<": ";
 	p1->printHand(cout, wholeHand);
@@ -38,9 +47,9 @@ void Table::printHand(bool wholeHand)
 
 ostream & operator<<(ostream & os, Table t)
 {
-	os << t.p1 << endl;
-	os << t.p2 << endl;
-	os << t.discardPile << endl;
-	os << t.tradeArea << endl;
+	os << *t.p1 << endl;
+	os << *t.p2 << endl;
+	os << "Discard Pile: " << t.discardPile << endl;
+	os << "Trade Area: " << t.tradeArea;
 	return os;
 }

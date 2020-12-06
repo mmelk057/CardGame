@@ -78,6 +78,11 @@ void Players::addChain(Chain_base* cb)
 	chains.push_back(cb);
 }
 
+void Players::addCard(Card *c)
+{
+	hand += c;
+}
+
 void Players::printHand(std::ostream & os, bool wholeHand)
 {
 	//Verify method

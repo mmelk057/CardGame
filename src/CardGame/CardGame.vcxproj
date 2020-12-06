@@ -161,6 +161,7 @@
     <ClCompile Include="Players.cpp" />
     <ClCompile Include="Table.cpp" />
     <ClCompile Include="TradeArea.cpp" />
+    <ClCompile Include="UserChoice.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CardFactory.h" />
@@ -173,6 +174,7 @@
     <ClInclude Include="resource.h" />
     <ClInclude Include="Table.h" />
     <ClInclude Include="TradeArea.h" />
+    <ClInclude Include="UserChoice.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Cards.h" />
