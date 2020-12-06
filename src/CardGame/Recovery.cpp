@@ -40,10 +40,10 @@ void recoverCard(std::istream& is, const CardFactory* factory, std::vector<Card*
 	//STRATEGY: GET AN ARBITRARY LINE, THEN PROCEED TO PARSE
 	//There is a MAXIMUM of 104 cards in a deck	
 	if (is && !is.eof()) {
-		char deckBuffer[104];
-		is.getline(deckBuffer, 104);
+		char deckBuffer[105];
+		is.getline(deckBuffer, 105);
 		for (char currentChar : deckBuffer) {
-			if (currentChar == '\n') {
+			if (currentChar == '\0') {
 				break;
 			}
 			Card* currentCard = factory->getCard(currentChar);

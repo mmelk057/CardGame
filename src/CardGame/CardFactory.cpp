@@ -106,8 +106,9 @@ Deck CardFactory::getDeck(){
 	std::ofstream outFile;
 	outFile.open(getFileName(), std::ofstream::trunc);
 	for (Card* c : cardLst) {
-		outFile << c->getFirst() << std::endl;
+		outFile << c->getFirst();
 	}
+	outFile << '\n';
 	outFile.close();
  
 	//Create an ifstream instance of the file we recently populated and
