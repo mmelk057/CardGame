@@ -55,13 +55,13 @@ Card* TradeArea::trade(std::string s) {
 int TradeArea::numCards() const {
 	return static_cast<int>(cards.size());
 }
-std::vector<std::string> TradeArea::getUnique()
-{
+
+std::vector<std::string> TradeArea::getUnique() {
 	std::list<Card*>::iterator ip;
 	ip = std::unique(cards.begin(), cards.end());
 	std::vector<std::string> unique;
 	for (Card* const c : cards) {
 
 	}
-	return ();
+	return unique;
 }

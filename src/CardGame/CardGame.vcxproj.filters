@@ -16,6 +16,9 @@
     <Filter Include="Source Files\CardContainers">
       <UniqueIdentifier>{e480a0d8-7ec3-444d-8d40-08657f79a866}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\StateRecovery">
+      <UniqueIdentifier>{88aa79b4-9e15-4d21-9e59-9a272e59402e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CardGame.cpp">
@@ -49,10 +52,13 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Loader.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\StateRecovery</Filter>
     </ClCompile>
     <ClCompile Include="Recovery.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\StateRecovery</Filter>
+    </ClCompile>
+    <ClCompile Include="Saving.cpp">
+      <Filter>Source Files\StateRecovery</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

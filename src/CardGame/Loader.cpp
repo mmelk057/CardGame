@@ -71,8 +71,13 @@ Player::Player(std::istream& is, const CardFactory* cf) {
 	std::stringstream sstream;
 	std::string fetchedCoins;
 	std::getline(is, fetchedCoins);
-	sstream << fetchedCoins;
-	sstream >> coins;
+	if (fetchedCoins.empty()) {
+		coins = 0;
+	}
+	else {
+		sstream << fetchedCoins;
+		sstream >> coins;
+	}
 
 	//RECOVER CHAIN BASES
 	chains = recoverChains(is, cf);

@@ -76,9 +76,9 @@ int main()
 				if (choice == 1) {
 					choice = 0;
 					
-					while (choice != 1) {
-						UserChoice
-					}
+					//while (choice != 1) {
+					//	UserChoice
+					//}
 				}
 				else {
 
