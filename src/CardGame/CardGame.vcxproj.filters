@@ -48,11 +48,13 @@
     <ClCompile Include="Card.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Player.cpp">
+    <ClCompile Include="Loader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Loader.cpp">
       <Filter>Source Files\StateRecovery</Filter>
+    <ClCompile Include="Player.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Recovery.cpp">
       <Filter>Source Files\StateRecovery</Filter>
@@ -81,6 +83,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="CardFactory.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CardGame.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Loader.h">

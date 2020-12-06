@@ -43,7 +43,7 @@ void recoverCard(std::istream& is, const CardFactory* factory, std::vector<Card*
 		char deckBuffer[105];
 		is.getline(deckBuffer, 105);
 		for (char currentChar : deckBuffer) {
-			if (currentChar == '\n') {
+			if (currentChar == '\0') {
 				break;
 			}
 			Card* currentCard = factory->getCard(currentChar);
