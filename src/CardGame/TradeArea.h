@@ -22,7 +22,7 @@ class TradeArea {
 		TradeArea() = default;
 		~TradeArea() = default;
 	private:
-		std::list<Card*> cards;
+		std::list<Card*> cards{};
 };
 
 #endif

@@ -1,5 +1,7 @@
 #include "Player.h"
 
+//Declare the Max # of Chains
+const int Player::MAX_CHAINS = 3;
 
 std::ostream& operator<<(std::ostream& os, const Player& player) {
 	bool flag = false;
@@ -23,11 +25,6 @@ Player & Player::operator+=(int c) {
 
 Player::Player(std::string& s) {
 	name = s;
-	//Create hand
-}
-
-Player::Player(std::istream& is, const CardFactory* cf) {
-	//TODO create from istream
 }
 
 std::string Player::getName() const {
@@ -71,7 +68,7 @@ void Player::addCard(Card *c) {
 	hand += c;
 }
 
-void Player::printHand(std::ostream & os, bool wholeHand) {
+void Player::printHand(std::ostream & os, bool wholeHand) const {
 	//Verify method
 	if (wholeHand) {
 		os << hand;

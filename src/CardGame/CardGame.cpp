@@ -62,9 +62,9 @@ int main()
 			std::cout << "Save game"<< std::endl;
 			continue;
 		}
-		for (Player* currPlayer : { table.getPlayerOne() , table.getPlayerTwo() }) {
+		for (Player currPlayer : { table.getPlayerOne() , table.getPlayerTwo() }) {
 			std::cout << table << std::endl;
-			std::cout << currPlayer->getName() << "'s turn" << std::endl;
+			std::cout << currPlayer.getName() << "'s turn" << std::endl;
 			Card* draw = table.getDeck().draw();
 			std::cout << "You drew " << draw->getName() << std::endl;
 			std::cout << table.getTradeArea().numCards() << std::endl;

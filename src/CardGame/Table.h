@@ -16,11 +16,11 @@
 
 class Table {
 	private:
-		DiscardPile discardPile;
-		TradeArea tradeArea;
-		Deck deck;
-		Player* player1;
-		Player* player2;
+		DiscardPile discardPile{};
+		TradeArea tradeArea{};
+		Deck deck{};
+		Player player1{};
+		Player player2{};
 
 	public:
 		Table(std::istream&, const CardFactory*);
@@ -29,9 +29,9 @@ class Table {
 		void printHand(bool) const;
 		friend std::ostream & operator<<(std::ostream &, const Table&);
 
-		Player* getPlayerOne() { return player1; }
+		Player& getPlayerOne() { return player1; }
 
-		Player* getPlayerTwo() { return player2; }
+		Player& getPlayerTwo() { return player2; }
 
 		Deck& getDeck() { return deck; }
 

@@ -14,10 +14,6 @@ std::ostream & operator<<(std::ostream & os, const TradeArea& tradeArea) {
 	return os;
 }
 
-TradeArea::TradeArea(std::istream& is, const CardFactory* cf) {
-	//TODO Construct Trade Area
-}
-
 TradeArea& TradeArea::operator+= (Card* c) {
 	cards.push_back(c);
 	return *this;

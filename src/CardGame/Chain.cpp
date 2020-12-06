@@ -38,12 +38,6 @@ std::ostream& Chain<T>::print(std::ostream& os) const {
 };
 
 template <typename T>
-Chain<T>::Chain(std::istream& is, const CardFactory* cf) {
-	//TODO LOAD CARDS FROM is
-	cards = {};
-};
-
-template <typename T>
 Chain<T>& Chain<T>::operator+= (Card* c) {
 	T* temp = dynamic_cast<T*>(c);
 	if (temp) {

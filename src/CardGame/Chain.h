@@ -19,12 +19,12 @@ public:
 template <typename T>
 class Chain : public ChainBase {
 	private:
-		std::vector<T*> cards;
+		std::vector<T*> cards{};
 		std::ostream& print(std::ostream&) const;
 	public:
-		Chain(std::istream&, const CardFactory*);
-		Chain<T>& operator+=(Card*);
 		int sell() const;
+		Chain<T>& operator+= (Card*);
+		Chain(std::istream&, const CardFactory*);
 		~Chain() = default;
 };
 
