@@ -39,8 +39,8 @@ class Card {
 		Card(const Card&) = delete;
 		void operator=(const Card&) = delete;
 	
-	protected:
-		virtual void print(std::ostream& out) const  = 0;
+	protected:	
+		virtual void print(std::ostream&) const  = 0;
 };
 
 class Blue : public virtual Card {
@@ -50,12 +50,12 @@ class Blue : public virtual Card {
 		char getFirst() const;
 		~Blue() = default;
 	protected:
-		void print(std::ostream& out) const;
+		void print(std::ostream&) const;
 };
 
 class Chili : public virtual Card {
 	public:
-		int getCardsPerCoin(int coins) const;
+		int getCardsPerCoin(int) const;
 		std::string getName() const;
 		char getFirst() const;
 		~Chili() = default;
@@ -65,62 +65,62 @@ class Chili : public virtual Card {
 
 class Stink : public virtual Card {
 	public:
-		int getCardsPerCoin(int coins) const;
+		int getCardsPerCoin(int) const;
 		std::string getName() const;
 		char getFirst() const;
 		~Stink() = default;
 	protected:
-		void print(std::ostream& out) const;
+		void print(std::ostream&) const;
 };
 
 class Green : public virtual Card {
 	public:
-		int getCardsPerCoin(int coins) const;
+		int getCardsPerCoin(int) const;
 		std::string getName() const;
 		char getFirst() const;
 		~Green() = default;
 	protected:
-		void print(std::ostream& out) const;
+		void print(std::ostream&) const;
 };
 
 class Soy : public virtual Card {
 	public:
-		int getCardsPerCoin(int coins) const;
+		int getCardsPerCoin(int) const;
 		std::string getName() const;
 		char getFirst() const;
 		~Soy() = default;
 	protected:
-		void print(std::ostream& out) const;
+		void print(std::ostream&) const;
 };
 
 class Black : public virtual Card {
 	public:
-		int getCardsPerCoin(int coins) const;
+		int getCardsPerCoin(int) const;
 		std::string getName() const;
 		char getFirst() const;
 		~Black() = default;
 	protected:
-		void print(std::ostream& out) const;
+		void print(std::ostream&) const;
 };
 
 class Red : public virtual Card {
 	public:
-		int getCardsPerCoin(int coins) const;
+		int getCardsPerCoin(int) const;
 		std::string getName() const;
 		char getFirst() const;
 		~Red() = default;
 	protected:
-		void print(std::ostream& out) const;
+		void print(std::ostream&) const;
 };
 
 class Garden : public virtual Card {
 	public:
-		int getCardsPerCoin(int coins) const;
+		int getCardsPerCoin(int) const;
 		std::string getName() const;
 		char getFirst() const;
 		~Garden() = default;
 	protected:
-		void print(std::ostream& out) const;
+		void print(std::ostream&) const;
 };
 
 #endif

@@ -1,4 +1,7 @@
 #include "Chain.h"
+#include "Cards.h"
+#include <sstream>
+#include <cctype>
 
 template class Chain<Blue>;
 template class Chain<Chili>;
@@ -17,11 +20,43 @@ std::ostream& operator<< (std::ostream& os, const ChainBase& chainBase) {
 	return os;
 };
 
+/*
+* Recover a chain.
+* Stream is of the given format: "B4", "S12", etc.
+*/
+template <class T>
+Chain<T>::Chain(std::istream& is, const CardFactory* cf) {
+	//GET CARD TYPE
+	char character;
+	is.get(character);
+	T* card = dynamic_cast<T*>(cf->getCard(character));
+	if (card == nullptr) {
+		std::cout << "UNABLE TO RECOVER CHAIN - EMPTY CHAIN!";
+	}
+	else {
+		//GET NUMBER OF CARDS
+		std::stringstream numStream;
+		char currentNum;
+		while (is.get(currentNum)) {
+			if (!std::isdigit(currentNum)) {
+				break;
+			}
+			numStream << currentNum;
+		}
+		int numberOfCards;
+		numStream >> numberOfCards;
+
+		//INSERT CARDS
+		for (int i = 0; i < numberOfCards; i++) {
+			cards.push_back(card);
+		}
+	}
+};
 
 /*
 * Print a given chain type
 */
-template <typename T>
+template <class T>
 std::ostream& Chain<T>::print(std::ostream& os) const {
 	int len = static_cast<int>(cards.size());
 	if (len == 0) {
@@ -37,7 +72,7 @@ std::ostream& Chain<T>::print(std::ostream& os) const {
 	return os;
 };
 
-template <typename T>
+template <class T>
 Chain<T>& Chain<T>::operator+= (Card* c) {
 	T* temp = dynamic_cast<T*>(c);
 	if (temp) {
@@ -54,7 +89,7 @@ Chain<T>& Chain<T>::operator+= (Card* c) {
 	return *this;
 };
 
-template <typename T>
+template <class T>
 int Chain<T>::sell() const {
 	T* card = cards.front();
 	int len = static_cast<int>(cards.size());

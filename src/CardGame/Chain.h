@@ -6,6 +6,7 @@
 #endif _MSC_VER
 
 #include <iostream>
+#include <type_traits>
 #include <vector>
 #include "Cards.h"
 #include "CardFactory.h"
@@ -16,8 +17,9 @@ public:
 	friend std::ostream& operator<<(std::ostream&, const ChainBase&);
 };
 
-template <typename T>
+template <class T>
 class Chain : public ChainBase {
+	static_assert((std::is_base_of<Card, T>::value), "T must be of type Card");
 	private:
 		std::vector<T*> cards{};
 		std::ostream& print(std::ostream&) const;
