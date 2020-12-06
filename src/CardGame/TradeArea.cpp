@@ -29,6 +29,7 @@ bool TradeArea::legal(Card * c) const
 	return flag;
 }
 
+
 Card * TradeArea::trade(string s)
 {
 	Card* flag = nullptr;
@@ -50,6 +51,17 @@ Card * TradeArea::trade(string s)
 int TradeArea::numCards() const
 {
 	return cards.size();
+}
+
+vector<string> TradeArea::getUnique()
+{
+	list<Card*>::iterator ip;
+	ip = unique(cards.begin(), cards.end());
+	vector<string> unique;
+	for (Card* const c : cards) {
+
+	}
+	return ();
 }
 
 ostream & operator<<(ostream & os, TradeArea ta)

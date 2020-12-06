@@ -11,7 +11,7 @@ public:
 	bool legal(Card*) const;
 	Card* trade(string);
 	int numCards() const;
-
+	vector<string> getUnique();
 	friend ostream & operator<<(ostream & os, TradeArea ta);
 	
 	TradeArea() = default;

@@ -73,7 +73,7 @@ int main()
 			if (table.tradeArea.numCards() > 0) {
 				//TODO Add bean cards from the TradeArea to chains or discard them.
 				//If the other player has left cards in the trade area from the previous turn (in Step 5), the player
-				//may add these cards to his / her chains or discard them.				choice = UserChoice({ "Take cards","Discard cards" });				if (choice == 1) {				}				else {				}
+				//may add these cards to his / her chains or discard them.				choice = UserChoice({ "Take cards","Discard cards" });				if (choice == 1) {					choice = 0;										while (choice != 1) {						UserChoice					}				}				else {				}
 			}
 			//TODO Play topmost card from Hand.
 			/*The player then plays the topmost card from his/her hand. The card must be added to a chain with
