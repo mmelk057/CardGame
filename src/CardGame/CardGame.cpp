@@ -256,7 +256,14 @@ int main()
 		displayTable(table);
 		playPlayer(table.getPlayerTwo(), deck, tradeArea, discardPile);
 	}
-	
-
+	if (winner.compare(table.getPlayerOne().getName()) == 0) {
+		std::cout << table.getPlayerOne().getName() << " is the winner!";
+	}
+	else if (winner.compare(table.getPlayerTwo().getName()) == 0) {
+		std::cout << table.getPlayerTwo().getName() << " is the winner!";
+	}
+	else {
+		std::cout << "TIE";
+	}
 	return 1;
 }
