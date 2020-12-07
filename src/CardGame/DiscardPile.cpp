@@ -3,7 +3,9 @@
 #include <cstdio>
 
 std::ostream& operator<< (std::ostream& os, const DiscardPile& pile) {
-	pile.print(os);
+	if (pile.top() != nullptr) {
+		os << *pile.top();
+	}
 	return os;
 }
 
@@ -25,8 +27,8 @@ Card* DiscardPile::pickUp() {
 	if (pile.empty()) {
 		return nullptr;
 	}
-	Card* currentFront = pile.front();
-	pile.erase(pile.begin());
+	Card* currentFront = pile.back();
+	pile.pop_back();
 	return currentFront;
 }
 
@@ -37,5 +39,5 @@ Card* DiscardPile::top() const {
 	if (pile.empty()) {
 		return nullptr;
 	}
-	return pile.front();
+	return pile.back();
 }

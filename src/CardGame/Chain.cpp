@@ -68,14 +68,28 @@ std::ostream& Chain<T>::print(std::ostream& os) const {
 		os << "Empty Chain";
 	}
 	else {
-		T* card = cards.front();
+		/*T* card = cards.front();
 		os << card->getName() << "   ";
 		for (int i = 0; i < cards.size(); i++) {
 			os << " " << card->getFirst();
-		}
+		}*/
+		os<<toString();
 	}
 	return os;
 };
+
+template<class T>
+std::string Chain<T>::toString() const
+{
+	T* card = cards.front();
+	std::string ret = card->getName() + "   ";
+	
+	for (int i = 0; i < cards.size(); i++) {
+		ret += " ";
+		ret += card->getFirst();
+	}
+	return ret;
+}
 
 template<class T>
 ChainBase & Chain<T>::addToChain(Card *c)
@@ -106,7 +120,6 @@ int Chain<T>::sell() const {
 	int len = static_cast<int>(cards.size());
 	for (int i = 4; i > 0; i--) {
 		if (len >= card->getCardsPerCoin(i)) {
-			//TODO ACTUALLY SELL CHAIN
 			return i;
 		}
 	}

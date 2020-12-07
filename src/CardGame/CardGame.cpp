@@ -47,13 +47,13 @@ int main()
 	CardFactory* cf = CardFactory::getFactory();
 	
 	//###################### TEMPORARY CODE - TESTING PURPOSES ####################
-	Loader loader = Loader();
+	/*Loader loader = Loader();
 	loader.loadState();
 	Table& table = loader.getTable();
 	table.getTradeArea() += table.getDeck().draw();
-	loader.saveState();
+	loader.saveState();*/
 	//#############################################################################
-
+	Table table;
 	//Testing
 	int choice = UserChoice({ "New game", "Load game from file" });
 	if (choice == 1) {//New game initialization
@@ -85,68 +85,95 @@ int main()
 		//Save or continue game
 		lineBreak();
 		choice = UserChoice({"Continue", "Save and exit"});
+		lineBreak();
 		if (choice == 2) {//Save game
 			//TODO exit game
 			std::cout << "Save game"<< std::endl;
 			continue;
 		}
-		for (Player currPlayer : { table.getPlayerOne() , table.getPlayerTwo() }) {
+		for (Player* currPlayer : { &table.getPlayerOne() , &table.getPlayerTwo() }) {
 			//Table print
-			lineBreak();
 			std::cout <<"Table: " <<std::endl<< table << std::endl << std::endl;
 
 			//Player draw
-			std::cout << currPlayer.getName() << "'s turn" << std::endl;
+			std::cout << currPlayer->getName() << "'s turn" << std::endl;
 			Card* draw = deck->draw();
+			currPlayer->addCard(draw);
 			std::cout << "You drew " << draw->getName() << std::endl;
-			std::cout << deck->size() << std::endl;
-			std::cout << tradeArea->numCards() << std::endl;
-			
+
 			if (tradeArea->numCards() > 0) {
 				//Trading step
 				choice = 0;
-				while (choice != 3 && tradeArea->numCards() > 0) {
+				while (tradeArea->numCards() > 0) {
 					std::cout << "Trading:" << std::endl;
 					choice = UserChoice({ "Take cards", "Discard cards", "Done trading" });
-					std::cout << std::endl;
+					lineBreak();
+					if (choice == 3) break; //Done trading
 					int tradeChoice = 0;
-					std::cout << "You: " << currPlayer << std::endl;
 
 					while (tradeArea->numCards() > 0) {
-						std::cout << "Trade Area: " << *tradeArea << std::endl;
+						std::cout << "Table: " << std::endl << table << std::endl;
 						//Get unique cards in the trading area
 						std::list<std::string> options = tradeArea->getUnique();
 						if (choice == 1) {
-							options.push_front("Done trading");
+							options.push_front("Done taking");
 						}
 						else {
 							options.push_front("Done discarding");
 						}
 						std::vector<std::string> v{ options.begin(), options.end() };
 						tradeChoice = UserChoice(v);
-						if (tradeChoice == 1) {//Done trading
+						if (tradeChoice == 1) {//Done trading/discarding
+							lineBreak();
 							break;
 						}
 						else {//Trade card
 							Card* drawn = tradeArea->trade(v[tradeChoice - 1]);
-							std::cout << drawn->getName() << std::endl << std::endl;
-							if (choice == 1 && !currPlayer.addToChain(drawn)) {//take card mode
+							std::cout << drawn->getName() << std::endl;
+							lineBreak();
+							if (choice == 1 && !currPlayer->addToChain(drawn)) {//take card mode
 								std::cout << "Cannot add to existing chains" << std::endl;
+								//Add back to trading pile
 								*tradeArea += drawn;
 							}
+							else if (choice == 2) {
+								*discardPile += drawn;
+							}
 						}
-						std::cout << "You: " << currPlayer << std::endl;
 					}
+					std::cout << "Table: " << std::endl << table << std::endl;
 					
 				}
 
 			}
-			//TODO Play topmost card from Hand.
-			/*The player then plays the topmost card from his/her hand. The card must be added to a chain with
-			the same beans.If the player has currently no such chain on the table, an old chain on the table
-			will have to be tied and sold, and a new chain must be started.If the chain has not reached a
-			sufficient length, a player may receive 0 coins. May repeat once
-			*/
+			
+			//Play top card, option to do a second time
+			std::cout << "Trading is done! Now you play the top card of your hand." << std::endl;
+			
+			for (int i = 0; i < 2; i++) {
+				Card* drawn = currPlayer->playTopCard();
+				std::cout << "Played " << drawn->getName()<<std::endl;
+				if (!currPlayer->addToChain(drawn)) {//Cannot add top card to chains
+					std::cout << "Cannot add to existing chains. Which would you like to sell?" << std::endl << *currPlayer <<std::endl;
+					choice = UserChoice(currPlayer->getChainStrings());
+					*currPlayer += (*currPlayer)[choice - 1].sell();
+					currPlayer->removeChain(choice - 1);
+					currPlayer->addToChain(drawn);
+					lineBreak();
+				}
+				else {
+					std::cout << "Added to existing chain!" << std::endl;
+				}
+				std::cout << *currPlayer << std::endl;
+				if (i == 0) {
+					std::cout << "Would you like to draw again?" << std::endl;
+					choice = UserChoice({ "Yes", "No" });
+					lineBreak();
+					if (choice == 2) {
+						break;
+					}
+				}
+			}
 		}
 		break;
 	}

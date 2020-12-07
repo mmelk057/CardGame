@@ -43,6 +43,19 @@ int Player::getNumChains() const {
 	return static_cast<int>(chains.size());
 }
 
+std::vector<std::string> Player::getChainStrings() {
+	std::vector<std::string> chainStrs;
+	for (std::shared_ptr<ChainBase> & chain : chains) {
+		chainStrs.push_back(chain->toString());
+	}
+	return chainStrs;
+}
+
+void Player::removeChain(int i)
+{
+	chains.erase(chains.begin() + i);
+}
+
 ChainBase& Player::operator[](int i) {
 	return *(chains[i]);
 }
@@ -147,7 +160,7 @@ bool Player::addToChain(Card* card) {
 			*chain += card;
 			return true;
 		}
-		catch(char* e) {
+		catch(const char* e) {
 			//std::cout << e;
 			continue;
 		}
@@ -159,4 +172,9 @@ bool Player::addToChain(Card* card) {
 		return true;
 	}
 	return false;
+}
+
+Card * Player::playTopCard()
+{
+	return hand.play();
 }

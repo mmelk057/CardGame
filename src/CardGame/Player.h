@@ -26,9 +26,12 @@ class Player {
 		friend std::ostream & operator<<(std::ostream&, const Player&);
 		void addCard(Card*);
 		bool addToChain(Card*);
+		Card* playTopCard();
 		//Operator overloads
 		Player& operator+=(int);
 		ChainBase& operator[](int);
+		std::vector<std::string> getChainStrings();
+		void removeChain(int);
 
 		//Constructor(s) & Destructor
 		Player(std::string&);

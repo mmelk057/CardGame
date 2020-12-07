@@ -4,6 +4,7 @@
 
 
 void Hand::display(std::ostream& os) const {
+	//TODO fix output
 	for (auto it = queue._Get_container().begin(); it != queue._Get_container().end(); it++) {
 		os << *(it) << ' ';
 	}
@@ -14,11 +15,22 @@ std::ostream& operator<< (std::ostream& os, const Hand& hand) {
 	return os;
 }
 
+bool comparePtrToCardH(Card* a, Card* b) { return (*a > *b); }
 /*
 Pushes a card to the back of the queue
 */
 Hand& Hand::operator+= (Card* card) {
-	queue.push(card);
+	std::vector<Card*> vec;
+	while (!queue.empty()) {
+		vec.push_back(queue.front());
+		queue.pop();
+	}
+	vec.push_back(card);
+	std::sort(vec.begin(), vec.end(), comparePtrToCardH);
+	while (!vec.empty()) {
+		queue.push(vec.back());
+		vec.pop_back();
+	}
 	return *(this);
 }
 

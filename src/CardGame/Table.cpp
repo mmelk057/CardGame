@@ -1,8 +1,8 @@
 #include "Table.h"
 
 std::ostream& operator<<(std::ostream & os, const Table& table) {
-	os << table.player1 << std::endl;
-	os << table.player2 << std::endl;
+	os << table.player1 << std::endl<<std::endl;
+	os << table.player2 << std::endl<<std::endl;
 	os << "Discard Pile: " << table.discardPile << std::endl;
 	os << "Trade Area: " << table.tradeArea;
 	return os;

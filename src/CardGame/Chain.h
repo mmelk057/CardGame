@@ -15,6 +15,8 @@ class ChainBase {
 public:
 	virtual std::ostream& print(std::ostream&) const = 0;
 	virtual ChainBase& addToChain(Card*) = 0;
+	virtual std::string toString() const = 0;
+	virtual int sell() const = 0;
 	friend std::ostream& operator<<(std::ostream&, const ChainBase&);
 	ChainBase& operator+= (Card*);
 };
@@ -30,6 +32,7 @@ class Chain : public ChainBase {
 		ChainBase& addToChain(Card*);
 		Chain<T>& operator+= (Card*);
 		Chain(std::istream&, const CardFactory*);
+		std::string toString() const;
 		Chain() = default;
 		~Chain() = default;
 };

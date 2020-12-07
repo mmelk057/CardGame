@@ -56,11 +56,11 @@ Card* TradeArea::trade(std::string s) {
 int TradeArea::numCards() const {
 	return static_cast<int>(cards.size());
 }
-
+bool comparePtrToCardTA(Card* a, Card* b) { return (*a < *b); }
 std::list<std::string> TradeArea::getUnique()
 {
 	std::list<Card*> unique = cards;
-	unique.sort();
+	unique.sort(comparePtrToCardTA);
 	unique.unique();
 	std::list<std::string> uniqueStrings;
 	for (Card* const c : unique) {
