@@ -77,7 +77,7 @@ void Player::addCard(Card *c) {
 	hand += c;
 }
 
-void Player::printHand(std::ostream & os, bool wholeHand) const {
+void Player::printHand(std::ostream & os, bool wholeHand) {
 	//Verify method
 	if (wholeHand) {
 		os << hand;

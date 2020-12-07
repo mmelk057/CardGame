@@ -174,17 +174,13 @@ int main()
 					}
 				}
 			}
+			
 		}
 		break;
 	}
 	
 	 
 	/*
-For each Player
-If chain is ended, cards for chain are removed and player receives coin(s).
-If player decides to
-Play the now topmost card from Hand.
-If chain is ended, cards for chain are removed and player receives coin(s).
 If player decides to
 Show the player's full hand and player selects an arbitrary card
 Discard the arbitrary card from the player's hand and place it on the discard pile.

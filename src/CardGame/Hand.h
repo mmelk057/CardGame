@@ -21,10 +21,10 @@ class Hand {
 	friend class Loader;
 	private:
 		std::queue<Card*, std::list<Card*>> queue{};
-		void display(std::ostream&) const;
+		void display(std::ostream&);
 
 	public:
-		friend std::ostream& operator<< (std::ostream&, const Hand&);
+		friend std::ostream& operator<< (std::ostream&, Hand&);
 	
 		Card* play();
 		Card* top() const;

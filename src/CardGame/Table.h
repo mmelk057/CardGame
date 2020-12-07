@@ -26,7 +26,7 @@ class Table {
 		Table(std::istream&, const CardFactory*);
 		Table(std::string, std::string, CardFactory*);
 		bool win(std::string&) const;
-		void printHand(bool) const;
+		void printHand(bool);
 		friend std::ostream & operator<<(std::ostream &, const Table&);
 
 		Player& getPlayerOne() { return player1; }

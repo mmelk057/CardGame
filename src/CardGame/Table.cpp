@@ -41,7 +41,7 @@ bool Table::win(std::string& winner) const {
 	return done;
 }
 
-void Table::printHand(bool wholeHand) const {
+void Table::printHand(bool wholeHand) {
 	std::cout << player1.getName()<<": ";
 	player1.printHand(std::cout, wholeHand);
 	std::cout << std::endl<< player2.getName() << ": ";

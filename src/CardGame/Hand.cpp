@@ -3,14 +3,16 @@
 #include <cstdio>
 
 
-void Hand::display(std::ostream& os) const {
-	//TODO fix output
-	for (auto it = queue._Get_container().begin(); it != queue._Get_container().end(); it++) {
-		os << *(it) << ' ';
+void Hand::display(std::ostream& os) {
+	for (int i = 0; i < queue.size(); i++) {
+		Card* currTop = top();
+		os << *currTop << " ";
+		queue.pop();
+		queue.push(currTop);
 	}
 }
 
-std::ostream& operator<< (std::ostream& os, const Hand& hand) {
+std::ostream& operator<< (std::ostream& os, Hand& hand) {
 	hand.display(os);
 	return os;
 }

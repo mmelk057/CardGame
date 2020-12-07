@@ -22,7 +22,7 @@ class Player {
 		int getMaxNumChains() const;
 		int getNumChains() const;
 		void buyThirdChain();
-		void printHand(std::ostream&, bool) const;
+		void printHand(std::ostream&, bool);
 		friend std::ostream & operator<<(std::ostream&, const Player&);
 		void addCard(Card*);
 		bool addToChain(Card*);
