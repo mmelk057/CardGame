@@ -58,9 +58,9 @@ void Player::removeChain(int i)
 	chains.erase(chains.begin() + i);
 }
 
-void Player::removeCard(int i)
+Card* Player::removeCard(int i)
 {
-	hand[i];
+	return hand[i];
 }
 
 ChainBase& Player::operator[](int i) {

@@ -35,7 +35,7 @@ class Player {
 		std::vector<std::string> getChainStrings();
 		std::vector<std::string> getHandStrings();
 		void removeChain(int);
-		void removeCard(int);
+		Card* removeCard(int);
 
 		//Constructor(s) & Destructor
 		Player(std::string&);

@@ -54,19 +54,26 @@ Card* Hand::operator[] (int index) {
 	if (index < 0 || index >= queue.size()) {
 		return nullptr;
 	}
+	std::list<Card*> lst;
+	Card * ret = nullptr;
 	int i = 0;
-	for (auto it = queue._Get_container().begin(); 
-				it != queue._Get_container().end(); 
-				it++, i++) {
+	while (!queue.empty()) {
+		lst.push_back(queue.front());
 		if (i == index) {
-			Card* card = *(it);
-			//We're simply removing the Card from the underlying container, not
-			//deleting the Card object reference.
-			static_cast<std::list<Card*>>(queue._Get_container()).erase(it);
-			return card;
+			ret = queue.front();
 		}
+		i++;
+		queue.pop();
 	}
-	return nullptr;
+	i = 0;
+	while (!lst.empty()) {
+		if (i != index){
+			queue.push(lst.front());
+		}
+		i++;
+		lst.pop_front();
+	}
+	return ret;
 }
 
 /*
