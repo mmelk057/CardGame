@@ -39,6 +39,10 @@ void displayCard(std::string message, Card* card) {
 	std::cout << "~~~~~~~~~~~~~~~~~~~~~~~~~" << std::endl << std::endl;
 }
 
+void displayTradeArea(TradeArea& tradeArea) {
+	std::cout << std::endl << tradeArea << std::endl;
+}
+
 void displayTurn(std::string playerName) {
 	std::string full = playerName;
 	full += "'s Turn";
@@ -184,7 +188,8 @@ void playPlayer(Player& player, Deck& deck, TradeArea& tradeArea, DiscardPile& d
 	std::list<std::string> cardOptions = tradeArea.getUnique();
 	for (std::string toTrade : cardOptions) {
 		//Note: If you finish trading, the remaining cards will remain in the trade area
-		std::cout << player << std::endl;
+		displayTradeArea(tradeArea);
+		displayPlayer(player);
 		std::cout << "Current Card: " << toTrade << std::endl;
 		lineBreak();
 		int tradeChoice = UserChoice({ "Take Card", "Skip" });
