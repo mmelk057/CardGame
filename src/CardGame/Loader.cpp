@@ -15,10 +15,14 @@
 #include "Hand.h"
 #include "Chain.h"
 
+//##################################### RECOVERY ###########################################################
 std::vector<ChainBase*> recoverChains(std::istream & is, const CardFactory * cf);
 void recoverCard(std::istream&, const CardFactory*, std::list<Card*>&);
 void recoverCard(std::istream&, const CardFactory*, std::vector<Card*>&);
 void recoverCard(std::istream& is, const CardFactory* factory, std::queue<Card*, std::list<Card*>>& queue);
+//##########################################################################################################
+
+
 
 
 /*
@@ -35,10 +39,6 @@ Loader::Loader(std::string playerOneName, std::string playerTwoName) {
 	std::remove(fileName.c_str());
 }
 
-Loader::~Loader() {
-	//SAVE STATE
-}
-
 /*
 * Recover Table State
 */
@@ -47,6 +47,9 @@ Table::Table(std::istream& is, const CardFactory* cf) {
 
 	//LOAD DECK
 	deck = Deck(is, cf);
+	if (deck.empty()) {
+		deck = (const_cast<CardFactory*>(cf))->getDeck();
+	}
 	//LOAD DISCARD PILE
 	discardPile = DiscardPile(is, cf);
 	//LOAD TRADE AREA
@@ -55,6 +58,29 @@ Table::Table(std::istream& is, const CardFactory* cf) {
 	player1 = Player(is, cf);
 	//LOAD PLAYER #2
 	player2 = Player(is, cf);
+}
+
+void Loader::saveState() {
+	std::ofstream outFile;
+	outFile.open(fileName, std::ofstream::out | std::ofstream::trunc);
+	if (outFile) {
+		//SAVE DECK
+		Deck deck = table.getDeck();
+		for (auto it = deck.begin(); it != deck.end(); it++) {
+			outFile << (*it)->getFirst();
+		}
+		outFile << '\n';
+
+	}
+	else {
+		std::cout << "Unable to save Table to {'" << fileName << "'}" << std::endl;
+	}
+	outFile.close();
+}
+
+
+void Loader::savePlayerState(std::ostream& os, const Player& player) {
+	//TODO
 }
 
 /*

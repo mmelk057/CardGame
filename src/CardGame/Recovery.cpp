@@ -19,7 +19,7 @@ void recoverCard(std::istream& is, const CardFactory* factory, std::list<Card*>&
 		char deckBuffer[105];
 		is.getline(deckBuffer, 105);
 		for (char currentChar : deckBuffer) {
-			if (currentChar == '\n') {
+			if (currentChar == '\n' || currentChar == '\0') {
 				break;
 			}
 			Card* currentCard = factory->getCard(currentChar);
@@ -43,7 +43,7 @@ void recoverCard(std::istream& is, const CardFactory* factory, std::vector<Card*
 		char deckBuffer[105];
 		is.getline(deckBuffer, 105);
 		for (char currentChar : deckBuffer) {
-			if (currentChar == '\0') {
+			if (currentChar == '\n' || currentChar == '\0') {
 				break;
 			}
 			Card* currentCard = factory->getCard(currentChar);
@@ -68,7 +68,7 @@ void recoverCard(std::istream& is, const CardFactory* factory, std::queue<Card*,
 		char deckBuffer[105];
 		is.getline(deckBuffer, 105);
 		for (char currentChar : deckBuffer) {
-			if (currentChar == '\n') {
+			if (currentChar == '\n' || currentChar == '\0') {
 				break;
 			}
 			Card* currentCard = factory->getCard(currentChar);
@@ -94,7 +94,7 @@ std::vector<ChainBase*> recoverChains(std::istream& is, const CardFactory* cf) {
 	while (tempStream.get(currentChar)) {
 		//DECODING FORMAT: [Type of Card][# of Chains of Type]  [Type of Card][# of Chains of Type] ...
 		//ie. "B4 S12 R3"
-		if (currentChar == '\n') {
+		if (currentChar == '\n' || currentChar == '\0') {
 			break;
 		}
 		if (cf->getCard(currentChar) != nullptr) {

@@ -10,6 +10,7 @@
 #include "TradeArea.h"
 #include "Player.h"
 #include "Table.h"
+#include "Loader.h"
 
 int UserChoice(std::vector<std::string> choices) {
 	while (true) {
@@ -39,10 +40,14 @@ int UserChoice(std::vector<std::string> choices) {
 }
 int main()
 {
-	//Testing
 	CardFactory* cf = CardFactory::getFactory();
+	
+	Loader loader = Loader("TEST1","TEST2");
+	Table table = loader.getTable();
+	loader.saveState();
+
+	//Testing
 	int choice = UserChoice({ "New game", "Load game from file" });
-	Table table;
 	if (choice == 1) {
 		std::string name1,name2;
 		std::cout << "Enter player name 1" << std::endl;

@@ -5,11 +5,15 @@
 #pragma once
 #endif _MSC_VER
 
+#include <iostream>
 #include <string>
 #include "Table.h"
 
+class Player;
+
 class Loader {
 	private:
+		void savePlayerState(std::ostream&, const Player&);
 		const std::string fileName = "SavedState.txt";
 		Table table;
 	public: 
@@ -22,7 +26,9 @@ class Loader {
 		/*
 		* When the loader object calls the desctructor, the state of the game should save
 		*/
-		~Loader();
+		~Loader() = default;
+
+		void saveState();
 
 		/*
 		Returns a built table
