@@ -193,14 +193,16 @@ void playPlayer(Player& player, Deck& deck, TradeArea& tradeArea, DiscardPile& d
 			bool addStatus = player.addToChain(card);
 			//This means we were unable to add a chain
 			if (!addStatus) {
-				tradeArea += card;
-				std::cout << "Could not add. No existing chain" << std::endl;
+				std::cout << "Cannot add to existing chains. Which would you like to sell?" << std::endl;
+				displayPlayer(player);
+				choice = UserChoice(player.getChainStrings());
+				player += player[choice - 1].sell();
+				player.removeChain(choice - 1);
+				player.addToChain(card);
 			}
-			else {
-				//We trade all the cards in the trade area of a given type
-				while (tradeArea.legal(card)) {
-					player.addToChain(tradeArea.trade(toTrade));
-				}
+			//We trade all the cards in the trade area of a given type
+			while (tradeArea.legal(card)) {
+				player.addToChain(tradeArea.trade(toTrade));
 			}
 		}
 		else {

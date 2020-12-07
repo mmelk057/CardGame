@@ -98,10 +98,10 @@ Chain<T>& Chain<T>::operator+= (Card* c) {
 	if (temp) {
 		cards.push_back(temp);
 		T* card = cards.front();
-		if ( cards.size() >= card->getCardsPerCoin(4) ) {
-			//Sell chain
-			int s = sell();
-		}
+		//if ( cards.size() >= card->getCardsPerCoin(4) ) {
+		//	//Sell chain
+		//	int s = sell();
+		//}
 	}
 	else {
 		throw "IllegalType";
