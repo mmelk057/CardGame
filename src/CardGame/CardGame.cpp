@@ -173,24 +173,41 @@ void playPlayer(Player& player, Deck& deck, TradeArea& tradeArea, DiscardPile& d
 		discardPile += player.removeCard(choice - 1);
 		player.printHand(std::cout, true);
 	}
-	
-	/*
-	Draw three cards from the deck and place cards in the trade area
-	while top card of discard pile matches an existing card in the trade area
-	draw the top-most card from the discard pile and place it in the trade area
-	end
-	for all cards in the trade area
-	if player wants to chain the card
-	chain the card.
-	else
-	card remains in trade area for the next player.
-	end
-	end
-	*/
+	for (int i = 0; i < 3; i++) {
+		tradeArea += deck.draw();
+	}
+	while (tradeArea.legal(discardPile.top())) {
+		tradeArea += discardPile.pickUp();
+	}
 
-	//DRAW TWO CARDS FROM DECK, ADD TO PLAYER'S HAND
-	player.addCard(deck.draw());
-	player.addCard(deck.draw());
+	std::list<std::string> cardOptions = tradeArea.getUnique();
+	for (std::string toTrade : cardOptions) {
+		//Note: If you finish trading, the remaining cards will remain in the trade area
+		std::cout << player << std::endl;
+		std::cout << "Current Card: " << toTrade << std::endl;
+		lineBreak();
+		int tradeChoice = UserChoice({ "Take Card", "Skip" });
+
+		Card* card = tradeArea.trade(toTrade);
+		if (tradeChoice == 1) {
+			bool addStatus = player.addToChain(card);
+			//This means we were unable to add a chain
+			if (!addStatus) {
+				tradeArea += card;
+				std::cout << "Could not add. No existing chain" << std::endl;
+			}
+			else {
+				//We trade all the cards in the trade area of a given type
+				while (tradeArea.legal(card)) {
+					player.addToChain(tradeArea.trade(toTrade));
+				}
+			}
+		}
+		else {
+			continue;
+		}
+
+	}
 }
 
 int main()
