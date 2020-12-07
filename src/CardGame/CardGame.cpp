@@ -176,6 +176,7 @@ void playPlayer(Player& player, Deck& deck, TradeArea& tradeArea, DiscardPile& d
 		lineBreak();
 		discardPile += player.removeCard(choice - 1);
 		player.printHand(std::cout, true);
+		std::cout << std::endl;
 	}
 	for (int i = 0; i < 3; i++) {
 		tradeArea += deck.draw();
