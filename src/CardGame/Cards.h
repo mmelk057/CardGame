@@ -15,7 +15,7 @@ class CardFactory;
 class Card {
 	public:
 		friend std::ostream& operator << (std::ostream& os, const Card& c);
-	
+		bool operator<(Card const &);
 		/*
 		Fetches the amount of cards needed to obtain n amount of coins
 		*/

@@ -14,7 +14,9 @@
 class ChainBase {
 public:
 	virtual std::ostream& print(std::ostream&) const = 0;
+	virtual ChainBase& addToChain(Card*) = 0;
 	friend std::ostream& operator<<(std::ostream&, const ChainBase&);
+	ChainBase& operator+= (Card*);
 };
 
 template <class T>
@@ -25,8 +27,10 @@ class Chain : public ChainBase {
 		std::ostream& print(std::ostream&) const;
 	public:
 		int sell() const;
+		ChainBase& addToChain(Card*);
 		Chain<T>& operator+= (Card*);
 		Chain(std::istream&, const CardFactory*);
+		Chain() = default;
 		~Chain() = default;
 };
 

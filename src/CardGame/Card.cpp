@@ -30,6 +30,10 @@ int fetchCoinsPerCard(const std::map<int, int>& value_mappings, int coins) {
 	return positions[coins] == INT_MAX ? -1 : positions[coins];
 }
 
+bool Card::operator<(Card const & other)
+{
+	return this->getFirst()<other.getFirst();
+}
 /* Non-member function impl of left-shift operator to stream Card class */
 std::ostream& operator<< (std::ostream& os, const Card& c) {
 	c.print(os);

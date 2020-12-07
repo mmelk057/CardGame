@@ -15,7 +15,7 @@
 #include "Hand.h"
 #include "Chain.h"
 
-std::vector<ChainBase*> recoverChains(std::istream & is, const CardFactory * cf);
+void recoverChains(std::istream &, const CardFactory *, std::vector<std::shared_ptr<ChainBase>>&);
 void recoverCard(std::istream&, const CardFactory*, std::list<Card*>&);
 void recoverCard(std::istream&, const CardFactory*, std::vector<Card*>&);
 void recoverCard(std::istream& is, const CardFactory* factory, std::queue<Card*, std::list<Card*>>& queue);
@@ -76,7 +76,7 @@ Player::Player(std::istream& is, const CardFactory* cf) {
 	sstream >> coins;
 
 	//RECOVER CHAIN BASES
-	chains = recoverChains(is, cf);
+	recoverChains(is, cf, chains);
 
 	//RECOVER HAND
 	hand = Hand(is, cf);

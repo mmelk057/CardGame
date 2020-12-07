@@ -59,6 +59,7 @@ int TradeArea::numCards() const {
 std::list<std::string> TradeArea::getUnique()
 {
 	std::list<Card*> unique = cards;
+	unique.sort();
 	unique.unique();
 	std::list<std::string> uniqueStrings;
 	for (Card* const c : unique) {

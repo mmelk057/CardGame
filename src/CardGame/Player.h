@@ -7,6 +7,7 @@
 
 #include <string>
 #include <vector>
+#include <memory>
 #include "Chain.h"
 #include "Hand.h"
 #include "Cards.h"
@@ -20,9 +21,8 @@ class Player {
 		void buyThirdChain();
 		void printHand(std::ostream&, bool) const;
 		friend std::ostream & operator<<(std::ostream&, const Player&);
-		void addChain(ChainBase*);
 		void addCard(Card*);
-
+		bool addToChain(Card*);
 		//Operator overloads
 		Player& operator+=(int);
 		ChainBase& operator[](int);
@@ -36,7 +36,7 @@ class Player {
 	private:
 		std::string name;
 		int coins = 0;
-		std::vector<ChainBase*> chains{};
+		std::vector<std::shared_ptr<ChainBase>> chains{};
 		int chainLimit = 2;
 		static const int MAX_CHAINS;
 		Hand hand{};

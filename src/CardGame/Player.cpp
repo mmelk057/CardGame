@@ -6,7 +6,7 @@ const int Player::MAX_CHAINS = 3;
 std::ostream& operator<<(std::ostream& os, const Player& player) {
 	bool flag = false;
 	os << player.name << "	" << player.coins << " coins" << std::endl;
-	for (ChainBase const* iter : player.chains) {
+	for (std::shared_ptr<ChainBase> const& iter : player.chains) {
 		if (flag) {
 			os << std::endl;
 		}
@@ -60,10 +60,6 @@ void Player::buyThirdChain() {
 	}
 }
 
-void Player::addChain(ChainBase* cb) {
-	chains.push_back(cb);
-}
-
 void Player::addCard(Card *c) {
 	hand += c;
 }
@@ -76,4 +72,91 @@ void Player::printHand(std::ostream & os, bool wholeHand) const {
 	else {
 		os << hand.top();
 	}
+}
+std::shared_ptr<ChainBase> newChain(Blue* card) {
+	//std::cout << "BLUE CARD" << std::endl;
+	return std::make_shared<Chain<Blue>>();
+}
+std::shared_ptr<ChainBase> newChain(Red* card) {
+	//std::cout << "RED CARD" << std::endl;
+	return std::make_shared<Chain<Red>>();
+}
+std::shared_ptr<ChainBase>  newChain(Chili* card) {
+	//std::cout << "Chili CARD" << std::endl;
+	return std::make_shared<Chain<Chili>>();
+}
+std::shared_ptr<ChainBase>  newChain(Stink* card) {
+	//std::cout << "Stink CARD" << std::endl;
+	return std::make_shared<Chain<Stink>>();
+}
+std::shared_ptr<ChainBase>  newChain(Green* card) {
+	//std::cout << "Green CARD" << std::endl;
+	return std::make_shared<Chain<Green>>();
+}
+std::shared_ptr<ChainBase>  newChain(Soy* card) {
+	//std::cout << "Soy CARD" << std::endl;
+	return std::make_shared<Chain<Soy>>();
+}
+std::shared_ptr<ChainBase>  newChain(Black* card) {
+	//std::cout << "Black CARD" << std::endl;
+	return std::make_shared<Chain<Black>>();
+}
+std::shared_ptr<ChainBase>  newChain(Garden* card) {
+	//std::cout << "Garden CARD" << std::endl;
+	return std::make_shared<Chain<Garden>>();
+}
+
+std::shared_ptr<ChainBase> newChain(Card* card) {
+	Blue* blue = dynamic_cast<Blue*>(card);
+	if (blue) {
+		return newChain(blue);
+	}
+	Red* red = dynamic_cast<Red*>(card);
+	if (red) {
+		return newChain(red);
+	}
+	Chili* chili = dynamic_cast<Chili*>(card);
+	if (chili) {
+		return newChain(chili);
+	}
+	Stink* stink = dynamic_cast<Stink*>(card);
+	if (stink) {
+		return newChain(stink);
+	}
+	Green* green = dynamic_cast<Green*>(card);
+	if (green) {
+		return newChain(green);
+	}
+	Soy* soy = dynamic_cast<Soy*>(card);
+	if (soy) {
+		return newChain(soy);
+	}
+	Black* black = dynamic_cast<Black*>(card);
+	if (black) {
+		return newChain(black);
+	}
+	Garden* garden = dynamic_cast<Garden*>(card);
+	if (garden) {
+		return newChain(garden);
+	}
+	return NULL;
+}
+bool Player::addToChain(Card* card) {
+	for (std::shared_ptr<ChainBase>& chain : chains) {
+		try {
+			*chain += card;
+			return true;
+		}
+		catch(char* e) {
+			//std::cout << e;
+			continue;
+		}
+	}
+	if (getNumChains() != chainLimit) {
+		std::shared_ptr<ChainBase> t = newChain(card);
+		*t += card;
+		chains.push_back(t);
+		return true;
+	}
+	return false;
 }

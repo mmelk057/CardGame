@@ -19,6 +19,11 @@ std::ostream& operator<< (std::ostream& os, const ChainBase& chainBase) {
 	chainBase.print(os);
 	return os;
 };
+ChainBase & ChainBase::operator+=(Card * c)
+{
+	addToChain(c);
+	return *this;
+}
 
 /*
 * Recover a chain.
@@ -72,6 +77,12 @@ std::ostream& Chain<T>::print(std::ostream& os) const {
 	return os;
 };
 
+template<class T>
+ChainBase & Chain<T>::addToChain(Card *c)
+{
+	*this += c;
+	return *this;
+}
 template <class T>
 Chain<T>& Chain<T>::operator+= (Card* c) {
 	T* temp = dynamic_cast<T*>(c);

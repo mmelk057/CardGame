@@ -7,6 +7,7 @@
 #include <queue>
 #include <vector>
 #include <sstream>
+#include <memory>
 
 
 /*
@@ -86,8 +87,7 @@ void recoverCard(std::istream& is, const CardFactory* factory, std::queue<Card*,
 * Recovers a list of chains.
 * Stream is of the given format: "B4 S12 R3"
 */
-std::vector<ChainBase*> recoverChains(std::istream& is, const CardFactory* cf) {
-	std::vector<ChainBase*> chains{};
+void recoverChains(std::istream& is, const CardFactory* cf, std::vector<std::shared_ptr<ChainBase>>& chains) {
 	char chainsBuffer[12];
 	std::istream& tempStream = is.getline(chainsBuffer, 12);
 	char currentChar;
@@ -112,35 +112,30 @@ std::vector<ChainBase*> recoverChains(std::istream& is, const CardFactory* cf) {
 			}
 
 			//CREATE CHAIN
-			ChainBase* newChain = nullptr;
 			if (dynamic_cast<Blue*>(cf->getCard(currentChar)) != nullptr) {
-				newChain = new Chain<Blue>(chainStream, cf);
+				chains.push_back(std::make_shared<Chain<Blue>>(chainStream, cf));
 			}
 			else if (dynamic_cast<Chili*>(cf->getCard(currentChar)) != nullptr) {
-				newChain = new Chain<Chili>(chainStream, cf);
+				chains.push_back(std::make_shared<Chain<Chili>>(chainStream, cf));
 			}
 			else if (dynamic_cast<Stink*>(cf->getCard(currentChar)) != nullptr) {
-				newChain = new Chain<Stink>(chainStream, cf);
+				chains.push_back(std::make_shared<Chain<Stink>>(chainStream, cf));
 			}
 			else if (dynamic_cast<Green*>(cf->getCard(currentChar)) != nullptr) {
-				newChain = new Chain<Green>(chainStream, cf);
+				chains.push_back(std::make_shared<Chain<Green>>(chainStream, cf));
 			}
 			else if (dynamic_cast<Soy*>(cf->getCard(currentChar)) != nullptr) {
-				newChain = new Chain<Soy>(chainStream, cf);
+				chains.push_back(std::make_shared<Chain<Soy>>(chainStream, cf));
 			}
 			else if (dynamic_cast<Black*>(cf->getCard(currentChar)) != nullptr) {
-				newChain = new Chain<Black>(chainStream, cf);
+				chains.push_back(std::make_shared<Chain<Black>>(chainStream, cf));
 			}
 			else if (dynamic_cast<Garden*>(cf->getCard(currentChar)) != nullptr) {
-				newChain = new Chain<Garden>(chainStream, cf);
+				chains.push_back(std::make_shared<Chain<Garden>>(chainStream, cf));
 			}
 			else {
-				newChain = new Chain<Red>(chainStream, cf);
+				chains.push_back(std::make_shared<Chain<Red>>(chainStream, cf));
 			}
-
-			//ADD IT TO LIST OF CHAINS
-			chains.push_back(newChain);
 		}
 	}
-	return chains;
 }
