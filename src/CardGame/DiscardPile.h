@@ -12,9 +12,10 @@
 #include "CardFactory.h"
 
 class Card;
+class Loader;
 
-class DiscardPile
-{
+class DiscardPile {
+	friend class Loader;
 	private:
 		std::vector<Card*> pile {};
 		void print(std::ostream&) const;

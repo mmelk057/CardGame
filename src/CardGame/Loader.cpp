@@ -16,13 +16,11 @@
 #include "Chain.h"
 
 //##################################### RECOVERY ###########################################################
-std::vector<ChainBase*> recoverChains(std::istream & is, const CardFactory * cf);
+//std::vector<ChainBase*> recoverChains(std::istream & is, const CardFactory * cf);
 void recoverCard(std::istream&, const CardFactory*, std::list<Card*>&);
 void recoverCard(std::istream&, const CardFactory*, std::vector<Card*>&);
 void recoverCard(std::istream& is, const CardFactory* factory, std::queue<Card*, std::list<Card*>>& queue);
 //##########################################################################################################
-
-
 
 
 /*
@@ -34,6 +32,12 @@ Loader::Loader(std::string playerOneName, std::string playerTwoName) {
 	std::ifstream inFile{};
 	inFile.open(fileName, std::ifstream::in);
 	table = Table(inFile, cf);
+	if (!playerOneName.empty()) {
+		table.getPlayerOne().name = playerOneName;
+	} 
+	if (!playerTwoName.empty()) {
+		table.getPlayerTwo().name = playerTwoName;
+	}
 	inFile.close();
 	//REMOVE OLD STATE
 	std::remove(fileName.c_str());
@@ -65,12 +69,31 @@ void Loader::saveState() {
 	outFile.open(fileName, std::ofstream::out | std::ofstream::trunc);
 	if (outFile) {
 		//SAVE DECK
-		Deck deck = table.getDeck();
-		for (auto it = deck.begin(); it != deck.end(); it++) {
+		Deck currDeck = table.getDeck();
+		for (auto it = currDeck.begin(); it != currDeck.end(); it++) {
 			outFile << (*it)->getFirst();
 		}
 		outFile << '\n';
 
+		//SAVE DISCARD PILE
+		DiscardPile currDP = table.getDiscardPile();
+		for (Card* c : currDP.pile) {
+			outFile << c->getFirst();
+		}
+		outFile << '\n';
+
+		//SAVE TRADE AREA
+		TradeArea currTA = table.getTradeArea();
+		for (Card* c : currTA.cards) {
+			outFile << c->getFirst();
+		}
+		outFile << '\n';
+
+		//SAVE PLAYER ONE
+		savePlayerState(outFile, table.getPlayerOne());
+		
+		//SAVE PLAYER TWO
+		savePlayerState(outFile, table.getPlayerTwo());
 	}
 	else {
 		std::cout << "Unable to save Table to {'" << fileName << "'}" << std::endl;
@@ -80,7 +103,23 @@ void Loader::saveState() {
 
 
 void Loader::savePlayerState(std::ostream& os, const Player& player) {
-	//TODO
+	//SAVE NAME
+	os << player.getName() << '\n';
+	
+	//SAVE COINS
+	os << player.getNumCoins() << '\n';
+	
+	//SAVE CHAINS - TODO
+	//###################
+	//###################
+	//###################
+	//###################
+
+	//SAVE HAND
+	for (Card* c : player.hand.queue._Get_container()) {
+		os << c->getFirst();
+	}
+	os << '\n';
 }
 
 /*
@@ -106,8 +145,11 @@ Player::Player(std::istream& is, const CardFactory* cf) {
 		sstream >> coins;
 	}
 
-	//RECOVER CHAIN BASES
-	chains = recoverChains(is, cf);
+	//RECOVER CHAIN BASES - TODO
+	//##########################
+	//##########################
+	//##########################
+	//##########################
 
 	//RECOVER HAND
 	hand = Hand(is, cf);

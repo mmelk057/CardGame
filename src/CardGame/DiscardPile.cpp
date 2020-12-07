@@ -22,6 +22,9 @@ void DiscardPile::print(std::ostream& os) const {
 Returns and removes the top card from the DiscardPile
 */
 Card* DiscardPile::pickUp() {
+	if (pile.empty()) {
+		return nullptr;
+	}
 	Card* currentFront = pile.front();
 	pile.erase(pile.begin());
 	return currentFront;
@@ -31,6 +34,9 @@ Card* DiscardPile::pickUp() {
 Returns the top card from the DiscardPile
 */
 Card* DiscardPile::top() const {
+	if (pile.empty()) {
+		return nullptr;
+	}
 	return pile.front();
 }
 

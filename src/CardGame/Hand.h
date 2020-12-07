@@ -15,9 +15,10 @@
 //Forward Declaring
 class Card;
 class CardFactory;
+class Loader;
 
-class Hand
-{
+class Hand {
+	friend class Loader;
 	private:
 		std::queue<Card*, std::list<Card*>> queue{};
 		void display(std::ostream&) const;
