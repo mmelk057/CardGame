@@ -17,18 +17,20 @@ class Loader {
 		const std::string fileName = "SavedState.txt";
 		Table table;
 	public: 
-
-		/*
-		* When a new loader object is created, the state of game should be reloaded from a file
-		*/
-		Loader(std::string, std::string);
-
-		/*
-		* When the loader object calls the desctructor, the state of the game should save
-		*/
+		Loader() = default;
 		~Loader() = default;
 
+
+		/*
+		* Saves the managed Table's state
+		*/
 		void saveState();
+
+		/*
+		* Loads a Table's state
+		*/
+		void loadState();
+		void loadState(std::string, std::string);
 
 		/*
 		Returns a built table

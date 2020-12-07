@@ -8,6 +8,9 @@ std::ostream& operator<<(std::ostream & os, const Table& table) {
 	return os;
 }
 
+/*
+* TODO: REMOVE THIS CONSTRUCTOR... UNECCESSARY --> RELY ON THE LOADER INSTEAD
+*/
 Table::Table(std::string playerOneName, std::string playerTwoName, CardFactory* cf) {
 	player1 = Player(playerOneName);
 	player2 = Player(playerTwoName);

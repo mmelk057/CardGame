@@ -24,12 +24,7 @@ class DiscardPile {
 		friend std::ostream& operator<< (std::ostream&, const DiscardPile&);
 
 		Card* pickUp();
-		Card* top() const;
-
-		//######## These methods ensure DiscardPile state is recovered if previously saved ######
-		//void saveState();
-		//static DiscardPile recoverState();
-		//#######################################################################################	
+		Card* top() const;	
 
 		DiscardPile() = default;
 		DiscardPile(std::istream&, const CardFactory*);

@@ -39,33 +39,3 @@ Card* DiscardPile::top() const {
 	}
 	return pile.front();
 }
-
-/*
-Saves the save of a DiscardPile
-*/
-//void DiscardPile::saveState() {
-//	std::ofstream outFile;
-//	outFile.open(fileName, std::ofstream::out | std::ofstream::trunc);
-//	for (Card* c : pile) {
-//		outFile << c->getFirst() << std::endl;
-//	}
-//	outFile.close();
-//}
-
-/*
-Recover previous DiscardPile state (if possible)
-*/
-//DiscardPile DiscardPile::recoverState() {
-//	std::ifstream inFile;
-//	inFile.open(fileName, std::ifstream::in);
-//	if (!inFile) {
-		//If the file cannot be opened, that implies that there is no previous
-		//State to recover to - create a new DiscardPile
-//		return DiscardPile{};
-//	}
-//	inFile.close();
-//	DiscardPile p = DiscardPile{ inFile, CardFactory::getFactory() };
-	//Remove previous state file
-//	std::remove(fileName.c_str());
-//	return p;
-//}

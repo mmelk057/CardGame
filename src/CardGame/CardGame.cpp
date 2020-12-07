@@ -42,9 +42,13 @@ int main()
 {
 	CardFactory* cf = CardFactory::getFactory();
 	
-	Loader loader = Loader("WORKS","");
+	//###################### TEMPORARY CODE - TESTING PURPOSES ####################
+	Loader loader = Loader();
+	loader.loadState();
 	Table& table = loader.getTable();
-	//loader.saveState();
+	table.getTradeArea() += table.getDeck().draw();
+	loader.saveState();
+	//#############################################################################
 
 	//Testing
 	int choice = UserChoice({ "New game", "Load game from file" });
