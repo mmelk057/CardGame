@@ -1,4 +1,5 @@
 #include "Player.h"
+#include <iostream>
 
 //Declare the Max # of Chains
 const int Player::MAX_CHAINS = 3;
@@ -18,13 +19,14 @@ std::ostream& operator<<(std::ostream& os, const Player& player) {
 	return os;
 }
 
-Player & Player::operator+=(int c) {
+Player& Player::operator+=(int c) {
 	coins += c;
 	return *this;
 }
 
 Player::Player(std::string& s) {
 	name = s;
+	coins = 0;
 }
 
 std::string Player::getName() const {
@@ -75,35 +77,35 @@ void Player::printHand(std::ostream & os, bool wholeHand) const {
 }
 std::shared_ptr<ChainBase> newChain(Blue* card) {
 	//std::cout << "BLUE CARD" << std::endl;
-	return std::make_shared<Chain<Blue>>();
+	return std::make_shared<Chain<Blue>>(card);
 }
 std::shared_ptr<ChainBase> newChain(Red* card) {
 	//std::cout << "RED CARD" << std::endl;
-	return std::make_shared<Chain<Red>>();
+	return std::make_shared<Chain<Red>>(card);
 }
 std::shared_ptr<ChainBase>  newChain(Chili* card) {
 	//std::cout << "Chili CARD" << std::endl;
-	return std::make_shared<Chain<Chili>>();
+	return std::make_shared<Chain<Chili>>(card);
 }
 std::shared_ptr<ChainBase>  newChain(Stink* card) {
 	//std::cout << "Stink CARD" << std::endl;
-	return std::make_shared<Chain<Stink>>();
+	return std::make_shared<Chain<Stink>>(card);
 }
 std::shared_ptr<ChainBase>  newChain(Green* card) {
 	//std::cout << "Green CARD" << std::endl;
-	return std::make_shared<Chain<Green>>();
+	return std::make_shared<Chain<Green>>(card);
 }
 std::shared_ptr<ChainBase>  newChain(Soy* card) {
 	//std::cout << "Soy CARD" << std::endl;
-	return std::make_shared<Chain<Soy>>();
+	return std::make_shared<Chain<Soy>>(card);
 }
 std::shared_ptr<ChainBase>  newChain(Black* card) {
 	//std::cout << "Black CARD" << std::endl;
-	return std::make_shared<Chain<Black>>();
+	return std::make_shared<Chain<Black>>(card);
 }
 std::shared_ptr<ChainBase>  newChain(Garden* card) {
 	//std::cout << "Garden CARD" << std::endl;
-	return std::make_shared<Chain<Garden>>();
+	return std::make_shared<Chain<Garden>>(card);
 }
 
 std::shared_ptr<ChainBase> newChain(Card* card) {
@@ -147,8 +149,8 @@ bool Player::addToChain(Card* card) {
 			*chain += card;
 			return true;
 		}
-		catch(char* e) {
-			//std::cout << e;
+		catch(const char* e) {
+			//std::cout << e << std::endl;
 			continue;
 		}
 	}

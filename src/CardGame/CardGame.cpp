@@ -50,7 +50,10 @@ int main()
 	Loader loader = Loader();
 	loader.loadState();
 	Table& table = loader.getTable();
-	table.getTradeArea() += table.getDeck().draw();
+	for (int i = 0; i < 15; i++) {
+		table.getPlayerOne().addToChain(table.getDeck().draw());
+		table.getPlayerTwo().addToChain(table.getDeck().draw());
+	}
 	loader.saveState();
 	//#############################################################################
 
@@ -67,6 +70,7 @@ int main()
 	else { //Load game from file
 		table = Table(std::cin, cf);
 	}
+
 	//Pointers to table components
 	DiscardPile* discardPile = &table.getDiscardPile();
 	TradeArea* tradeArea = &table.getTradeArea();
