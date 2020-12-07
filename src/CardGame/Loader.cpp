@@ -23,7 +23,7 @@ void recoverCard(std::istream&, const CardFactory*, std::vector<Card*>&);
 void recoverCard(std::istream& is, const CardFactory* factory, std::queue<Card*, std::list<Card*>>& queue);
 //##########################################################################################################
 
-//################################## LOADING START #########################################################
+//################################## SAVING START #########################################################
 
 void Loader::saveState() {
 	std::ofstream outFile;
