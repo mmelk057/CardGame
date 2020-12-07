@@ -5,6 +5,7 @@
 #include <queue>
 #include <sstream>
 #include <cctype>
+#include <memory>
 #include "CardFactory.h"
 #include "Cards.h"
 #include "Loader.h"
@@ -69,11 +70,13 @@ void Loader::savePlayerState(std::ostream& os, const Player& player) {
 	//SAVE COINS
 	os << player.getNumCoins() << '\n';
 	
-	//SAVE CHAINS - TODO
-	//###################
-	//###################
-	//###################
-	//###################
+	//SAVE CHAINS
+	for (const std::shared_ptr<ChainBase> cb : player.chains) {
+		const Card* cardType = cb->getReference();
+		int chainSize = cb->getChainSize();
+		os << cardType->getFirst() << chainSize << ' ';
+	}
+	os << '\n';
 
 	//SAVE HAND
 	for (Card* c : player.hand.queue._Get_container()) {
@@ -177,6 +180,7 @@ Player::Player(std::istream& is, const CardFactory* cf) {
 		sstream >> coins;
 	}
 
+	//LOAD CHAINS
 	recoverChains(is, cf, chains);
 
 	//LOAD HAND

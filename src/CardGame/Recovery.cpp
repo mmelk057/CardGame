@@ -89,54 +89,54 @@ void recoverCard(std::istream& is, const CardFactory* factory, std::queue<Card*,
 * Stream is of the given format: "B4 S12 R3"
 */
 void recoverChains(std::istream& is, const CardFactory* cf, std::vector<std::shared_ptr<ChainBase>>& chains) {
-	char chainsBuffer[12];
-	std::istream& tempStream = is.getline(chainsBuffer, 12);
-	char currentChar;
-	while (tempStream.get(currentChar)) {
-		//DECODING FORMAT: [Type of Card][# of Chains of Type]  [Type of Card][# of Chains of Type] ...
-		//ie. "B4 S12 R3"
-		if (currentChar == '\n' || currentChar == '\0') {
+	std::vector<std::string> rawChains{};
+	std::string input;
+	std::getline(is, input);
+	const char* c_input = input.c_str();
+	std::string workingStr;
+	for (int i = 0; i < static_cast<int>(input.size()); i++) {
+		if (c_input[i] == '\n') {
 			break;
 		}
-		if (cf->getCard(currentChar) != nullptr) {
-			//ADD CARD TYPE TO STREAM
-			std::stringstream chainStream;
-			chainStream << currentChar;
+		else if (c_input[i] == ' ') {
+			rawChains.push_back(workingStr);
+			workingStr = "";
+		}
+		else {
+			workingStr += c_input[i];
+		}
+	}
 
-			//ADD NUMBER OF CARDS OF A TYPE TO STREAM
-			char currentNum;
-			while (tempStream.get(currentNum)) {
-				if (!std::isdigit(currentNum)) {
-					break;
-				}
-				chainStream << currentNum;
-			}
-
-			//CREATE CHAIN
-			if (dynamic_cast<Blue*>(cf->getCard(currentChar)) != nullptr) {
-				chains.push_back(std::make_shared<Chain<Blue>>(chainStream, cf));
-			}
-			else if (dynamic_cast<Chili*>(cf->getCard(currentChar)) != nullptr) {
-				chains.push_back(std::make_shared<Chain<Chili>>(chainStream, cf));
-			}
-			else if (dynamic_cast<Stink*>(cf->getCard(currentChar)) != nullptr) {
-				chains.push_back(std::make_shared<Chain<Stink>>(chainStream, cf));
-			}
-			else if (dynamic_cast<Green*>(cf->getCard(currentChar)) != nullptr) {
-				chains.push_back(std::make_shared<Chain<Green>>(chainStream, cf));
-			}
-			else if (dynamic_cast<Soy*>(cf->getCard(currentChar)) != nullptr) {
-				chains.push_back(std::make_shared<Chain<Soy>>(chainStream, cf));
-			}
-			else if (dynamic_cast<Black*>(cf->getCard(currentChar)) != nullptr) {
-				chains.push_back(std::make_shared<Chain<Black>>(chainStream, cf));
-			}
-			else if (dynamic_cast<Garden*>(cf->getCard(currentChar)) != nullptr) {
-				chains.push_back(std::make_shared<Chain<Garden>>(chainStream, cf));
-			}
-			else {
-				chains.push_back(std::make_shared<Chain<Red>>(chainStream, cf));
-			}
+	for (std::string rawInput : rawChains) {
+		std::stringstream sstream;
+		sstream << rawInput;
+		
+		char cardType = rawInput.empty() ? ' ' : rawInput.c_str()[0];
+		
+		//CREATE CHAIN
+		if (dynamic_cast<Blue*>(cf->getCard(cardType)) != nullptr) {
+			chains.push_back(std::make_shared<Chain<Blue>>(sstream, cf));
+		}
+		else if (dynamic_cast<Chili*>(cf->getCard(cardType)) != nullptr) {
+			chains.push_back(std::make_shared<Chain<Chili>>(sstream, cf));
+		}
+		else if (dynamic_cast<Stink*>(cf->getCard(cardType)) != nullptr) {
+			chains.push_back(std::make_shared<Chain<Stink>>(sstream, cf));
+		}
+		else if (dynamic_cast<Green*>(cf->getCard(cardType)) != nullptr) {
+			chains.push_back(std::make_shared<Chain<Green>>(sstream, cf));
+		}
+		else if (dynamic_cast<Soy*>(cf->getCard(cardType)) != nullptr) {
+			chains.push_back(std::make_shared<Chain<Soy>>(sstream, cf));
+		}
+		else if (dynamic_cast<Black*>(cf->getCard(cardType)) != nullptr) {
+			chains.push_back(std::make_shared<Chain<Black>>(sstream, cf));
+		}
+		else if (dynamic_cast<Garden*>(cf->getCard(cardType)) != nullptr) {
+			chains.push_back(std::make_shared<Chain<Garden>>(sstream, cf));
+		} 
+		else if(dynamic_cast<Red*>(cf->getCard(cardType)) != nullptr) {
+			chains.push_back(std::make_shared<Chain<Red>>(sstream, cf));
 		}
 	}
 }

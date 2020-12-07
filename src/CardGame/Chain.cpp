@@ -1,7 +1,10 @@
 #include "Chain.h"
 #include "Cards.h"
 #include <sstream>
+#include <iostream>
+#include <string>
 #include <cctype>
+#include <stdexcept>
 
 template class Chain<Blue>;
 template class Chain<Chili>;
@@ -32,28 +35,20 @@ ChainBase & ChainBase::operator+=(Card * c)
 template <class T>
 Chain<T>::Chain(std::istream& is, const CardFactory* cf) {
 	//GET CARD TYPE
-	char character;
-	is.get(character);
-	T* card = dynamic_cast<T*>(cf->getCard(character));
-	if (card == nullptr) {
-		std::cout << "UNABLE TO RECOVER CHAIN - EMPTY CHAIN!";
+	std::string input;
+	std::getline(is, input);
+	char cardType = input.c_str()[0];
+	reference = dynamic_cast<T*>(cf->getCard(cardType));
+	if (reference == nullptr) {
+		throw std::invalid_argument("Invalid card type provided. Unable to build Chain!");
 	}
 	else {
 		//GET NUMBER OF CARDS
-		std::stringstream numStream;
-		char currentNum;
-		while (is.get(currentNum)) {
-			if (!std::isdigit(currentNum)) {
-				break;
-			}
-			numStream << currentNum;
-		}
-		int numberOfCards;
-		numStream >> numberOfCards;
+		int numberOfCards = std::stoi(input.substr(1));
 
 		//INSERT CARDS
 		for (int i = 0; i < numberOfCards; i++) {
-			cards.push_back(card);
+			cards.push_back(reference);
 		}
 	}
 };
@@ -116,10 +111,9 @@ Chain<T>& Chain<T>::operator+= (Card* c) {
 
 template <class T>
 int Chain<T>::sell() const {
-	T* card = cards.front();
 	int len = static_cast<int>(cards.size());
 	for (int i = 4; i > 0; i--) {
-		if (len >= card->getCardsPerCoin(i)) {
+		if (len >= reference->getCardsPerCoin(i)) {
 			return i;
 		}
 	}

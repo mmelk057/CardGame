@@ -27,6 +27,8 @@ class Player {
 		void addCard(Card*);
 		bool addToChain(Card*);
 		Card* playTopCard();
+		//Ties and sells a chain
+		void tieChain(int);
 		//Operator overloads
 		Player& operator+=(int);
 		ChainBase& operator[](int);
