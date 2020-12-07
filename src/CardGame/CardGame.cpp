@@ -135,12 +135,12 @@ void playPlayer(Player& player, Deck& deck, TradeArea& tradeArea, DiscardPile& d
 	}
 	//Play top card, option to do a second time
 	std::cout << "Trading is done! Now you play the top card of your hand." << std::endl;
-
 	for (int i = 0; i < 2; i++) {
 		Card* drawn = player.playTopCard();
-		std::cout << "Played " << drawn->getName() << std::endl;
+		displayCard("Played", drawn);
 		if (!player.addToChain(drawn)) {//Cannot add top card to chains
-			std::cout << "Cannot add to existing chains. Which would you like to sell?" << std::endl << player << std::endl;
+			std::cout << "Cannot add to existing chains. Which would you like to sell?" << std::endl;
+			displayPlayer(player);
 			choice = UserChoice(player.getChainStrings());
 			player += player[choice - 1].sell();
 			player.removeChain(choice - 1);
@@ -150,7 +150,9 @@ void playPlayer(Player& player, Deck& deck, TradeArea& tradeArea, DiscardPile& d
 		else {
 			std::cout << "Added to existing chain!" << std::endl;
 		}
-		std::cout << player << std::endl;
+
+		displayPlayer(player);
+
 		if (i == 0) {
 			std::cout << "Would you like to draw again?" << std::endl;
 			choice = UserChoice({ "Yes", "No" });
@@ -170,34 +172,8 @@ void playPlayer(Player& player, Deck& deck, TradeArea& tradeArea, DiscardPile& d
 		lineBreak();
 		discardPile += player.removeCard(choice - 1);
 		player.printHand(std::cout, true);
-	for (int i = 0; i < 2; i++) {
-		Card* drawn = player.playTopCard();
-		displayCard("Played", drawn);
-		if (!player.addToChain(drawn)) {//Cannot add top card to chains
-			std::cout << "Cannot add to existing chains. Which would you like to sell?" << std::endl;
-			displayPlayer(player);
-			choice = UserChoice(player.getChainStrings());
-			player += player[choice - 1].sell();
-			player.removeChain(choice - 1);
-			player.addToChain(drawn);
-			lineBreak();
-		}
-		else {
-			std::cout << "Added to existing chain!" << std::endl;
-		}
-		
-		displayPlayer(player);
-		
-		if (i == 0) {
-			std::cout << "Would you like to draw again?" << std::endl;
-			choice = UserChoice({ "Yes", "No" });
-			lineBreak();
-			if (choice == 2) {
-				break;
-			}
-		}
 	}
-	std::cout << discardPile;
+	
 	/*
 	Draw three cards from the deck and place cards in the trade area
 	while top card of discard pile matches an existing card in the trade area
