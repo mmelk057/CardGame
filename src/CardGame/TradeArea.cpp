@@ -21,20 +21,12 @@ TradeArea& TradeArea::operator+= (Card* c) {
 }
 
 bool TradeArea::legal(Card * c) const {
-	bool flag = false;
-	int first3 = 0;
-
 	for (Card* const& i : cards) {
 		if ( (c->getName()).compare(i->getName()) == 0 ) {
-			flag = true;
-			break;
-		}
-		first3++;
-		if (first3 >= 3) {
-			break;
+			return true;
 		}
 	}
-	return flag;
+	return false;
 }
 
 Card* TradeArea::trade(std::string s) {
@@ -47,7 +39,7 @@ Card* TradeArea::trade(std::string s) {
 			break;
 		}
 	}
-	if (flag!=nullptr) {
+	if (flag != nullptr) {
 		cards.erase(iter);
 	}
 	return flag;

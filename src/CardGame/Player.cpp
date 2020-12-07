@@ -184,8 +184,11 @@ Card * Player::playTopCard()
 * Ties & sells a chain from a specific index 
 */
 void Player::tieChain(int index) {
-	if (index >= 0 && index < getMaxNumChains()) {
-		auto chain = chains.at(index);
-		coins += chain->sell();
+	int pos = 0;
+	for (auto iterator = chains.begin(); iterator != chains.end(); ++iterator, ++pos) {
+		if (pos == index) {
+			coins += (*iterator)->sell();
+			chains.erase(iterator);
+		}
 	}
 }
