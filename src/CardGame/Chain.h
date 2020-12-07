@@ -17,7 +17,7 @@ class ChainBase {
 		virtual const Card* getReference() = 0;
 		virtual const int getChainSize() = 0;
 		//#################################################
-
+		virtual int sell() const = 0;
 		virtual std::ostream& print(std::ostream&) const = 0;
 		virtual ChainBase& addToChain(Card*) = 0;
 		friend std::ostream& operator<<(std::ostream&, const ChainBase&);

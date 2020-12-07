@@ -26,6 +26,8 @@ class Player {
 		friend std::ostream & operator<<(std::ostream&, const Player&);
 		void addCard(Card*);
 		bool addToChain(Card*);
+		//Ties and sells a chain
+		void tieChain(int);
 		//Operator overloads
 		Player& operator+=(int);
 		ChainBase& operator[](int);

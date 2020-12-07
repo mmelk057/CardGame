@@ -162,3 +162,13 @@ bool Player::addToChain(Card* card) {
 	}
 	return false;
 }
+
+/*
+* Ties & sells a chain from a specific index 
+*/
+void Player::tieChain(int index) {
+	if (index >= 0 && index < getMaxNumChains()) {
+		auto chain = chains.at(index);
+		coins += chain->sell();
+	}
+}

@@ -97,10 +97,9 @@ Chain<T>& Chain<T>::operator+= (Card* c) {
 
 template <class T>
 int Chain<T>::sell() const {
-	T* card = cards.front();
 	int len = static_cast<int>(cards.size());
 	for (int i = 4; i > 0; i--) {
-		if (len >= card->getCardsPerCoin(i)) {
+		if (len >= reference->getCardsPerCoin(i)) {
 			//TODO ACTUALLY SELL CHAIN
 			return i;
 		}
