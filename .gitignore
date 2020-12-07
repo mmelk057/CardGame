@@ -391,5 +391,7 @@ MigrationBackup/
 # Ionide (cross platform F# VS Code tools) working folder
 .ionide/
 
+CardFactoryState.txt
+
 # Fody - auto-generated XML schema
 FodyWeavers.xsd

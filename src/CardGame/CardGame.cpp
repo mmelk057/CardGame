@@ -83,10 +83,9 @@ int main()
 		for (Player currPlayer : { table.getPlayerOne() , table.getPlayerTwo() }) {
 			//Table print
 			lineBreak();
-			std::cout <<"Table: " <<std::endl<< table << std::endl;
+			std::cout <<"Table: " <<std::endl<< table << std::endl << std::endl;
 
 			//Player draw
-			lineBreak();
 			std::cout << currPlayer.getName() << "'s turn" << std::endl;
 			Card* draw = deck->draw();
 			std::cout << "You drew " << draw->getName() << std::endl;
@@ -95,9 +94,9 @@ int main()
 			
 			if (tradeArea->numCards() > 0) {
 				//Trading step
-				lineBreak();
 				choice = 0;
 				while (choice != 3 && tradeArea->numCards() > 0) {
+					std::cout << "Trading:" << std::endl;
 					choice = UserChoice({ "Take cards", "Discard cards", "Done trading" });
 					std::cout << std::endl;
 					int tradeChoice = 0;
