@@ -211,6 +211,10 @@ void playPlayer(Player& player, Deck& deck, TradeArea& tradeArea, DiscardPile& d
 		}
 
 	}
+
+	//DRAW TWO CARDS FROM DECK, ADD TO PLAYER'S HAND
+	player.addCard(deck.draw());
+	player.addCard(deck.draw());
 }
 
 int main()
