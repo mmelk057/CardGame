@@ -4,6 +4,7 @@
 #include <vector>
 #include <exception>
 #include <string>
+#include <iomanip>
 #include "CardFactory.h"
 #include "Hand.h"
 #include "Chain.h"
@@ -13,13 +14,40 @@
 #include "Loader.h"
 
 void lineBreak() {
-	std::cout << "-------" << std::endl;
+	std::cout << "-------------------------" << std::endl;
 }
 
 void displayTable(Table& table) {
-	std::cout << "Current Table State: " << std::endl;
-	lineBreak();
+	std::cout << std::endl << "------------------------" << std::endl;
+	std::cout << "| Current Table State: |" << std::endl;
+	std::cout << "------------------------" << std::endl;
 	std::cout << table;
+	lineBreak();
+}
+
+void displayPlayer(Player& player) {
+	std::cout << std::endl << " ------------------------" << std::endl;
+	std::cout << " | Current Player State |" << std::endl;
+	std::cout << " ------------------------" << std::endl;
+	std::cout << player;
+	lineBreak();
+}
+
+void displayCard(std::string message, Card* card) {
+	std::cout << std::endl << "~~~~~~~~~~~~~~~~~~~~~~~~~" << std::endl;
+	std::cout << message << " " << card->getName() << std::endl;
+	std::cout << "~~~~~~~~~~~~~~~~~~~~~~~~~" << std::endl << std::endl;
+}
+
+void displayTurn(std::string playerName) {
+	std::string full = playerName;
+	full += "'s Turn";
+	int fillAmountTop = static_cast<int>(full.size())*2;
+	int fillAmountRight = static_cast<int>(full.size());
+	std::cout << std::endl << std::setfill('*') << std::setw(fillAmountTop) << '\n';
+	std::cout << full;
+	std::cout << std::setfill('*') << std::setw(fillAmountRight) << '\n';
+	std::cout << std::setfill('*') << std::setw(fillAmountTop) << '\n';
 }
 
 /*
@@ -38,9 +66,9 @@ int UserChoice(std::vector<std::string> choices) {
 		int userChoice = 0;
 		
 		try {
-			userChoice = stoi(input);
+			userChoice = std::stoi(input);
 		} catch (std::exception e) {
-			std::cout << "Invalid choice" << std::endl<<std::endl;
+			std::cout << "Invalid choice" << std::endl << std::endl;
 			continue;
 		}
 		
@@ -57,13 +85,11 @@ int UserChoice(std::vector<std::string> choices) {
 */
 void playPlayer(Player& player, Deck& deck, TradeArea& tradeArea, DiscardPile& discardPile) {
 	//Player draw
-	std::cout << player.getName() << "'s turn" << std::endl;
-	std::cout << player;
-	lineBreak();
+	displayTurn(player.getName());
+	displayPlayer(player);
 	Card* draw = deck.draw();
 	player.addCard(draw);
-	std::cout << "You Drew " << draw->getName() << std::endl;
-	lineBreak();
+	displayCard("You Drew", draw);
 	int choice = 0;
 	//IF TradeArea is not empty , ++ Cards from Trade Area to Chains or Discard Them
 	if (tradeArea.numCards() > 0) {
@@ -111,9 +137,10 @@ void playPlayer(Player& player, Deck& deck, TradeArea& tradeArea, DiscardPile& d
 
 	for (int i = 0; i < 2; i++) {
 		Card* drawn = player.playTopCard();
-		std::cout << "Played " << drawn->getName() << std::endl;
-		if (player.addToChain(drawn)) {//Cannot add top card to chains
-			std::cout << "Cannot add to existing chains. Which would you like to sell?" << std::endl << player << std::endl;
+		displayCard("Played", drawn);
+		if (!player.addToChain(drawn)) {//Cannot add top card to chains
+			std::cout << "Cannot add to existing chains. Which would you like to sell?" << std::endl;
+			displayPlayer(player);
 			choice = UserChoice(player.getChainStrings());
 			player += player[choice - 1].sell();
 			player.removeChain(choice - 1);
@@ -123,7 +150,9 @@ void playPlayer(Player& player, Deck& deck, TradeArea& tradeArea, DiscardPile& d
 		else {
 			std::cout << "Added to existing chain!" << std::endl;
 		}
-		std::cout << player << std::endl;
+		
+		displayPlayer(player);
+		
 		if (i == 0) {
 			std::cout << "Would you like to draw again?" << std::endl;
 			choice = UserChoice({ "Yes", "No" });

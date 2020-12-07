@@ -16,6 +16,7 @@ std::ostream& operator<<(std::ostream& os, const Player& player) {
 		}
 		os << *iter;
 	}
+	os << std::endl;
 	return os;
 }
 
