@@ -10,6 +10,7 @@
 #include "TradeArea.h"
 #include "Player.h"
 #include "Table.h"
+#include "Loader.h"
 
 void lineBreak() {
 	std::cout << "-------" << std::endl;
@@ -44,9 +45,18 @@ int main()
 {
 	//Get card factory
 	CardFactory* cf = CardFactory::getFactory();
+	
+	//###################### TEMPORARY CODE - TESTING PURPOSES ####################
+	Loader loader = Loader();
+	loader.loadState();
+	Table& table = loader.getTable();
+	table.getTradeArea() += table.getDeck().draw();
+	loader.saveState();
+	//#############################################################################
+
+	//Testing
 	int choice = UserChoice({ "New game", "Load game from file" });
-	Table table;
-	if (choice == 1) { //New game initialization
+	if (choice == 1) {//New game initialization
 		std::string name1,name2;
 		std::cout << "Enter player name 1" << std::endl;
 		std::cin >> name1;

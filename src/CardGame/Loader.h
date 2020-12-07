@@ -5,24 +5,32 @@
 #pragma once
 #endif _MSC_VER
 
+#include <iostream>
 #include <string>
 #include "Table.h"
 
+class Player;
+
 class Loader {
 	private:
+		void savePlayerState(std::ostream&, const Player&);
 		const std::string fileName = "SavedState.txt";
 		Table table;
 	public: 
+		Loader() = default;
+		~Loader() = default;
+
 
 		/*
-		* When a new loader object is created, the state of game should be reloaded from a file
+		* Saves the managed Table's state
 		*/
-		Loader(std::string, std::string);
+		void saveState();
 
 		/*
-		* When the loader object calls the desctructor, the state of the game should save
+		* Loads a Table's state
 		*/
-		~Loader();
+		void loadState();
+		void loadState(std::string, std::string);
 
 		/*
 		Returns a built table

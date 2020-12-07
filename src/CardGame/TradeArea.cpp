@@ -56,6 +56,7 @@ Card* TradeArea::trade(std::string s) {
 int TradeArea::numCards() const {
 	return static_cast<int>(cards.size());
 }
+
 std::list<std::string> TradeArea::getUnique()
 {
 	std::list<Card*> unique = cards;

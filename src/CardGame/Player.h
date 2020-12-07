@@ -12,7 +12,10 @@
 #include "Hand.h"
 #include "Cards.h"
 
+class Loader;
+
 class Player {
+	friend class Loader;
 	public:
 		std::string getName() const;
 		int getNumCoins() const;

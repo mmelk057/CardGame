@@ -50,6 +50,9 @@ Card* Hand::operator[] (int index) {
 Returns and removes the top card from the player's hand
 */
 Card* Hand::play() {
+	if (queue.empty()) {
+		return nullptr;
+	}
 	Card* topCard = top();
 	queue.pop();
 	return topCard;
@@ -59,35 +62,8 @@ Card* Hand::play() {
 Returns but does not remove the top card from the player's hand
 */
 Card* Hand::top() const {
+	if (queue.empty()) {
+		return nullptr;
+	}
 	return queue.front();
 }
-
-/*
-Saves the state of a given Hand instance
-*/
-//void Hand::saveState(int identifier) {
-//	std::ofstream outFile;
-//	outFile.open(getFileName(identifier), std::ofstream::out | std::ofstream::trunc);
-//	for (Card* c : queue._Get_container()) {
-//		outFile << c->getFirst() << std::endl;
-//	}
-//	outFile.close();
-//}
-
-/*
-Recovers a given Hand instance
-*/
-//Hand Hand::recoverState(int identifier) {
-//	std::ifstream inFile;
-//	inFile.open(getFileName(identifier), std::ifstream::in);
-//	if (!inFile) {
-		//If file (previous state) does not exist, 
-		//return a new Hand
-//		return Hand{};
-//	}
-//	inFile.close();
-//	Hand h = Hand{ inFile, CardFactory::getFactory() };
-	//Remove previous state file
-//	std::remove(fileName.c_str());
-//	return h;
-//}

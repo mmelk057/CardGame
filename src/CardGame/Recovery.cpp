@@ -17,10 +17,10 @@ void recoverCard(std::istream& is, const CardFactory* factory, std::list<Card*>&
 	//STRATEGY: GET AN ARBITRARY LINE, THEN PROCEED TO PARSE
 	//There is a MAXIMUM of 104 cards in a deck	
 	if (is && !is.eof()) {
-		char deckBuffer[104];
-		is.getline(deckBuffer, 104);
+		char deckBuffer[105];
+		is.getline(deckBuffer, 105);
 		for (char currentChar : deckBuffer) {
-			if (currentChar == '\n') {
+			if (currentChar == '\n' || currentChar == '\0') {
 				break;
 			}
 			Card* currentCard = factory->getCard(currentChar);
@@ -44,7 +44,7 @@ void recoverCard(std::istream& is, const CardFactory* factory, std::vector<Card*
 		char deckBuffer[105];
 		is.getline(deckBuffer, 105);
 		for (char currentChar : deckBuffer) {
-			if (currentChar == '\0') {
+			if (currentChar == '\n' || currentChar == '\0') {
 				break;
 			}
 			Card* currentCard = factory->getCard(currentChar);
@@ -66,10 +66,10 @@ void recoverCard(std::istream& is, const CardFactory* factory, std::queue<Card*,
 	//STRATEGY: GET AN ARBITRARY LINE, THEN PROCEED TO PARSE
 	//There is a MAXIMUM of 104 cards in a deck	
 	if (is && !is.eof()) {
-		char deckBuffer[104];
-		is.getline(deckBuffer, 104);
+		char deckBuffer[105];
+		is.getline(deckBuffer, 105);
 		for (char currentChar : deckBuffer) {
-			if (currentChar == '\n') {
+			if (currentChar == '\n' || currentChar == '\0') {
 				break;
 			}
 			Card* currentCard = factory->getCard(currentChar);
@@ -94,7 +94,7 @@ void recoverChains(std::istream& is, const CardFactory* cf, std::vector<std::sha
 	while (tempStream.get(currentChar)) {
 		//DECODING FORMAT: [Type of Card][# of Chains of Type]  [Type of Card][# of Chains of Type] ...
 		//ie. "B4 S12 R3"
-		if (currentChar == '\n') {
+		if (currentChar == '\n' || currentChar == '\0') {
 			break;
 		}
 		if (cf->getCard(currentChar) != nullptr) {

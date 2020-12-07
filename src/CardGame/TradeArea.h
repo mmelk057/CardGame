@@ -11,7 +11,10 @@
 #include "Cards.h"
 #include "CardFactory.h"
 
+class Loader;
+
 class TradeArea {
+	friend class Loader;
 	public:
 		TradeArea(std::istream&, const CardFactory*);
 		TradeArea& operator+=(Card*);
