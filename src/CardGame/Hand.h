@@ -31,6 +31,7 @@ class Hand {
 
 		Card* operator[](int);
 		Hand& operator += (Card*);
+		std::vector<std::string> getStrings();
 		Hand(std::istream&, const CardFactory*);
 		Hand() = default;
 		~Hand() = default;

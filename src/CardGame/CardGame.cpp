@@ -110,10 +110,13 @@ void playPlayer(Player& player, Deck& deck, TradeArea& tradeArea, DiscardPile& d
 					//This means we were unable to add a chain
 					if (!addStatus) {
 						tradeArea+=card;
+						std::cout << "Could not add. No existing chain"<<std::endl;
 					}
-					//We trade all the cards in the trade area of a given type
-					while (tradeArea.legal(card)) {
-						player.addToChain(tradeArea.trade(toTrade));
+					else {
+						//We trade all the cards in the trade area of a given type
+						while (tradeArea.legal(card)) {
+							player.addToChain(tradeArea.trade(toTrade));
+						}
 					}
 				}
 				else if (tradeChoice == 2) {
@@ -128,13 +131,44 @@ void playPlayer(Player& player, Deck& deck, TradeArea& tradeArea, DiscardPile& d
 				
 			}
 		}
-
-		
-
 	}
 	//Play top card, option to do a second time
-	std::cout << "Trading is done! Now you play the top card of your hand." << std::endl;
+	//std::cout << "Trading is done! Now you play the top card of your hand." << std::endl;
 
+	//for (int i = 0; i < 2; i++) {
+	//	Card* drawn = player.playTopCard();
+	//	std::cout << "Played " << drawn->getName() << std::endl;
+	//	if (!player.addToChain(drawn)) {//Cannot add top card to chains
+	//		std::cout << "Cannot add to existing chains. Which would you like to sell?" << std::endl << player << std::endl;
+	//		choice = UserChoice(player.getChainStrings());
+	//		player += player[choice - 1].sell();
+	//		player.removeChain(choice - 1);
+	//		player.addToChain(drawn);
+	//		lineBreak();
+	//	}
+	//	else {
+	//		std::cout << "Added to existing chain!" << std::endl;
+	//	}
+	//	std::cout << player << std::endl;
+	//	if (i == 0) {
+	//		std::cout << "Would you like to draw again?" << std::endl;
+	//		choice = UserChoice({ "Yes", "No" });
+	//		lineBreak();
+	//		if (choice == 2) {
+	//			break;
+	//		}
+	//	}
+	//}
+	std::cout << "Would you like to discard 1 card?" << std::endl;
+	choice = UserChoice({ "Yes","No" });
+	lineBreak();
+	if (choice == 1) {
+		player.printHand(std::cout, true);
+		std::cout << "Which card would you like to discard?" << std::endl;
+		choice = UserChoice(player.getHandStrings());
+		lineBreak();
+		player.removeCard(choice - 1);
+		player.printHand(std::cout, true);
 	for (int i = 0; i < 2; i++) {
 		Card* drawn = player.playTopCard();
 		displayCard("Played", drawn);
@@ -162,6 +196,24 @@ void playPlayer(Player& player, Deck& deck, TradeArea& tradeArea, DiscardPile& d
 			}
 		}
 	}
+	/*
+	If player decides to
+	Show the player's full hand and player selects an arbitrary card
+	Discard the arbitrary card from the player's hand and place it on the discard pile.
+	Draw three cards from the deck and place cards in the trade area
+	while top card of discard pile matches an existing card in the trade area
+	draw the top-most card from the discard pile and place it in the trade area
+	end
+	for all cards in the trade area
+	if player wants to chain the card
+	chain the card.
+	else
+	card remains in trade area for the next player.
+	end
+	Draw two cards from Deck and add the cards to the player's hand (at the back).
+	end
+	end
+	*/
 }
 
 int main()
@@ -204,24 +256,6 @@ int main()
 		playPlayer(table.getPlayerTwo(), deck, tradeArea, discardPile);
 	}
 	
-	 
-	/*
-If player decides to
-Show the player's full hand and player selects an arbitrary card
-Discard the arbitrary card from the player's hand and place it on the discard pile.
-Draw three cards from the deck and place cards in the trade area
-while top card of discard pile matches an existing card in the trade area
-draw the top-most card from the discard pile and place it in the trade area
-end
-for all cards in the trade area
-if player wants to chain the card
-chain the card.
-else
-card remains in trade area for the next player.
-end
-Draw two cards from Deck and add the cards to the player's hand (at the back).
-end
-end
-	*/
+
 	return 1;
 }
