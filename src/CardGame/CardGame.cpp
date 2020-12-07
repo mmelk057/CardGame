@@ -185,10 +185,12 @@ void playPlayer(Player& player, Deck& deck, TradeArea& tradeArea, DiscardPile& d
 	else
 	card remains in trade area for the next player.
 	end
-	Draw two cards from Deck and add the cards to the player's hand (at the back).
-	end
 	end
 	*/
+
+	//DRAW TWO CARDS FROM DECK, ADD TO PLAYER'S HAND
+	player.addCard(deck.draw());
+	player.addCard(deck.draw());
 }
 
 int main()
