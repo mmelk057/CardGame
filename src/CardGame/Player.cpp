@@ -58,6 +58,11 @@ void Player::removeChain(int i)
 	chains.erase(chains.begin() + i);
 }
 
+void Player::removeCard(int i)
+{
+	hand[i];
+}
+
 ChainBase& Player::operator[](int i) {
 	return *(chains[i]);
 }
@@ -79,6 +84,9 @@ void Player::addCard(Card *c) {
 	hand += c;
 }
 
+std::vector<std::string> Player::getHandStrings() {
+	return hand.getStrings();
+}
 void Player::printHand(std::ostream & os, bool wholeHand) {
 	//Verify method
 	if (wholeHand) {
