@@ -70,6 +70,9 @@ void Loader::savePlayerState(std::ostream& os, const Player& player) {
 	//SAVE COINS
 	os << player.getNumCoins() << '\n';
 	
+	//SAVE MAX NUM OF CHAINS
+	os << player.getMaxNumChains() << '\n';
+
 	//SAVE CHAINS
 	for (const std::shared_ptr<ChainBase> cb : player.chains) {
 		const Card* cardType = cb->getReference();
@@ -178,6 +181,18 @@ Player::Player(std::istream& is, const CardFactory* cf) {
 	else {
 		sstream << fetchedCoins;
 		sstream >> coins;
+	}
+
+	//LOAD MAX NUM OF CHAINS
+	std::stringstream maxnumstream;
+	std::string maxNum;
+	std::getline(is, maxNum);
+	if (maxNum.empty()) {
+		chainLimit = 2;
+	}
+	else {
+		maxnumstream << maxNum;
+		maxnumstream >> chainLimit;
 	}
 
 	//LOAD CHAINS
