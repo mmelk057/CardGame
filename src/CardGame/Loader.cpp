@@ -6,6 +6,8 @@
 #include <sstream>
 #include <cctype>
 #include <memory>
+#include <vector>
+#include <queue>
 #include "CardFactory.h"
 #include "Cards.h"
 #include "Loader.h"
@@ -63,7 +65,7 @@ void Loader::saveState() {
 }
 
 
-void Loader::savePlayerState(std::ostream& os, const Player& player) {
+void Loader::savePlayerState(std::ostream& os, Player& player) {
 	//SAVE NAME
 	os << player.getName() << '\n';
 	
@@ -82,7 +84,15 @@ void Loader::savePlayerState(std::ostream& os, const Player& player) {
 	os << '\n';
 
 	//SAVE HAND
-	for (Card* c : player.hand.queue._Get_container()) {
+	std::vector<Card*> cards{};
+	while (!player.hand.queue.empty()) {
+		cards.push_back(player.hand.queue.front());
+		player.hand.queue.pop();
+	}
+	for (Card* c : cards) {
+		player.hand.queue.push(c);
+	}
+	for (Card* c : cards) {
 		os << c->getFirst();
 	}
 	os << '\n';

@@ -1,6 +1,7 @@
 #include "CardFactory.h"
 #include "Deck.h"
 #include <fstream>
+#include <algorithm>
 
 
 CardFactory* CardFactory::cf = nullptr;

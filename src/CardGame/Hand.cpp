@@ -1,6 +1,7 @@
 #include "Hand.h"
 #include <fstream>
 #include <cstdio>
+#include <algorithm>
 
 
 void Hand::display(std::ostream& os) {

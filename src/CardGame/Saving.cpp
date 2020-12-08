@@ -19,7 +19,15 @@ void saveCardSet(std::ostream& os, std::list<Card*>& cardList) {
 }
 
 void saveCardSet(std::ostream& os, std::queue<Card*, std::list<Card*>> cardQueue) {
-	for (Card* c : cardQueue._Get_container()) {
+	std::vector<Card*> cards{};
+	while (!cardQueue.empty()) {
+		cards.push_back(cardQueue.front());
+		cardQueue.pop();
+	}
+	for (Card* c : cards) {
+		cardQueue.push(c);
+	}
+	for (Card* c : cards) {
 		os << c->getFirst();
 	}
 	os << '\n';

@@ -13,7 +13,7 @@ class Player;
 
 class Loader {
 	private:
-		void savePlayerState(std::ostream&, const Player&);
+		void savePlayerState(std::ostream&, Player&);
 		const std::string fileName = "SavedState.txt";
 		Table table;
 	public: 
