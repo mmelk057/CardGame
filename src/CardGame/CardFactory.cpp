@@ -9,8 +9,10 @@ CardFactory* CardFactory::cf = nullptr;
 Populate a cardLst with duplicate Card pointer entries, n amount of times.
 */
 void CardFactory::populateList(int n, Card* c) {
-	for (int i = 0; i < n; i++) {
-		cardLst.push_back(c);
+	if (c != nullptr) {
+		for (int i = 0; i < n; i++) {
+			cardLst.push_back(c);
+		}
 	}
 }
 

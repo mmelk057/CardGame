@@ -31,6 +31,9 @@ bool comparePtrToCardH(Card* a, Card* b) { return (*a > *b); }
 Pushes a card to the back of the queue
 */
 Hand& Hand::operator+= (Card* card) {
+	if (card == nullptr) {
+		return *(this);
+	}
 	std::vector<Card*> vec;
 	while (!queue.empty()) {
 		vec.push_back(queue.front());

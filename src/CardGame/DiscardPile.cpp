@@ -10,7 +10,9 @@ std::ostream& operator<< (std::ostream& os, const DiscardPile& pile) {
 }
 
 DiscardPile& DiscardPile::operator+= (Card* c) {
-	pile.push_back(c);
+	if (c != nullptr) {
+		pile.push_back(c);
+	}
 	return *(this);
 }
 

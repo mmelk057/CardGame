@@ -22,9 +22,10 @@ std::ostream& operator<< (std::ostream& os, const ChainBase& chainBase) {
 	chainBase.print(os);
 	return os;
 };
-ChainBase & ChainBase::operator+=(Card * c)
-{
-	addToChain(c);
+ChainBase & ChainBase::operator+=(Card * c){
+	if (c != nullptr) {
+		addToChain(c);
+	}
 	return *this;
 }
 
@@ -87,13 +88,17 @@ std::string Chain<T>::toString() const
 }
 
 template<class T>
-ChainBase & Chain<T>::addToChain(Card *c)
-{
-	*this += c;
+ChainBase & Chain<T>::addToChain(Card *c) {
+	if (c != nullptr) {
+		*this += c;
+	}
 	return *this;
 }
 template <class T>
 Chain<T>& Chain<T>::operator+= (Card* c) {
+	if (c == nullptr) {
+		return *this;
+	}
 	T* temp = dynamic_cast<T*>(c);
 	if (temp) {
 		cards.push_back(temp);
