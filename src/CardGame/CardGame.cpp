@@ -89,7 +89,6 @@ int UserChoice(std::vector<std::string> choices) {
 */
 void playPlayer(Player& player, Deck& deck, TradeArea& tradeArea, DiscardPile& discardPile) {
 	//Player draw
-	player += 3;
 	displayTurn(player.getName());
 	displayPlayer(player);
 	Card* draw = deck.draw();
@@ -270,7 +269,6 @@ int main()
 			flag = true;
 			break;
 		}
-		table.getPlayerOne() += 1;
 		playPlayer(table.getPlayerOne(), deck, tradeArea, discardPile);
 		displayTable(table);
 		playPlayer(table.getPlayerTwo(), deck, tradeArea, discardPile);
