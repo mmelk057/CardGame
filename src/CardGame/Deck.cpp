@@ -17,6 +17,9 @@ void Deck::display(std::ostream& os) const {
 Draw the top card from the deck
 */
 Card* Deck::draw() {
+	if (this->empty()) {
+		return nullptr;
+	}
 	Card* front = this->front();
 	this->erase(begin());
 	return front;

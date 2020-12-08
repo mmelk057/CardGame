@@ -54,13 +54,17 @@ std::vector<std::string> Player::getChainStrings() {
 	return chainStrs;
 }
 
-void Player::removeChain(int i)
-{
-	chains.erase(chains.begin() + i);
+void Player::removeChain(int i) {
+	int chainSize = static_cast<int>(chains.size());
+	if (!chains.empty() && i >= 0 && i < chainSize) {
+		chains.erase(chains.begin() + i);
+	}
 }
 
-Card* Player::removeCard(int i)
-{
+Card* Player::removeCard(int i) {
+	if (i < 0) {
+		return nullptr;
+	}
 	return hand[i];
 }
 
@@ -82,7 +86,9 @@ void Player::buyThirdChain() {
 }
 
 void Player::addCard(Card *c) {
-	hand += c;
+	if (c != nullptr) {
+		hand += c;
+	}
 }
 
 std::vector<std::string> Player::getHandStrings() {
@@ -166,6 +172,9 @@ std::shared_ptr<ChainBase> newChain(Card* card) {
 	return NULL;
 }
 bool Player::addToChain(Card* card) {
+	if (card == nullptr) {
+		return false;
+	}
 	for (std::shared_ptr<ChainBase>& chain : chains) {
 		try {
 			*chain += card;
