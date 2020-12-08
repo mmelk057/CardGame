@@ -110,7 +110,7 @@ void playPlayer(Player& player, Deck& deck, TradeArea& tradeArea, DiscardPile& d
 				int tradeChoice = UserChoice({ "Take Card", "Discard Card", "Finish Trading" });
 				
 				Card* card = tradeArea.trade(toTrade);
-				if (tradeChoice == 1) {
+				if (tradeChoice == 1 && card != nullptr) {
 					bool addStatus = player.addToChain(card);
 					//This means we were unable to add a chain
 					if (!addStatus) {
@@ -146,8 +146,11 @@ void playPlayer(Player& player, Deck& deck, TradeArea& tradeArea, DiscardPile& d
 			std::cout << "Cannot add to existing chains. Which would you like to sell?" << std::endl;
 			displayPlayer(player);
 			choice = UserChoice(player.getChainStrings());
+			//SELL THE OLD CHAIN CHAIN
 			player += player[choice - 1].sell();
+			//REMOVE THE OLD CHAIN FROM PLAYER
 			player.removeChain(choice - 1);
+			//ADD NEW CHAIN ASSOCIATED TO DRAWN CARD
 			player.addToChain(drawn);
 			lineBreak();
 		}
@@ -195,7 +198,7 @@ void playPlayer(Player& player, Deck& deck, TradeArea& tradeArea, DiscardPile& d
 		int tradeChoice = UserChoice({ "Take Card", "Skip" });
 
 		Card* card = tradeArea.trade(toTrade);
-		if (tradeChoice == 1) {
+		if (tradeChoice == 1 && card != nullptr) {
 			bool addStatus = player.addToChain(card);
 			//This means we were unable to add a chain
 			if (!addStatus) {

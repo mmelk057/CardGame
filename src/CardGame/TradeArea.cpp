@@ -21,9 +21,11 @@ TradeArea& TradeArea::operator+= (Card* c) {
 }
 
 bool TradeArea::legal(Card * c) const {
-	for (Card* const& i : cards) {
-		if ( (c->getName()).compare(i->getName()) == 0 ) {
-			return true;
+	if (c != nullptr) {
+		for (Card* const& i : cards) {
+			if ((c->getName()).compare(i->getName()) == 0) {
+				return true;
+			}
 		}
 	}
 	return false;
@@ -48,9 +50,15 @@ Card* TradeArea::trade(std::string s) {
 int TradeArea::numCards() const {
 	return static_cast<int>(cards.size());
 }
-bool comparePtrToCardTA(Card* a, Card* b) { return (*a < *b); }
-std::list<std::string> TradeArea::getUnique()
-{
+
+bool comparePtrToCardTA(Card* a, Card* b) { 
+	if (a != nullptr && b != nullptr) {
+		return (*a < *b);
+	}
+	return false;
+}
+
+std::list<std::string> TradeArea::getUnique() {
 	std::list<Card*> unique = cards;
 	unique.sort(comparePtrToCardTA);
 	unique.unique();
