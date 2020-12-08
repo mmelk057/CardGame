@@ -181,7 +181,7 @@ void playPlayer(Player& player, Deck& deck, TradeArea& tradeArea, DiscardPile& d
 	for (int i = 0; i < 3; i++) {
 		tradeArea += deck.draw();
 	}
-	while (tradeArea.legal(discardPile.top())) {
+	while (discardPile.top() != nullptr && tradeArea.legal(discardPile.top())) {
 		tradeArea += discardPile.pickUp();
 	}
 
@@ -194,8 +194,9 @@ void playPlayer(Player& player, Deck& deck, TradeArea& tradeArea, DiscardPile& d
 		lineBreak();
 		int tradeChoice = UserChoice({ "Take Card", "Skip" });
 
-		Card* card = tradeArea.trade(toTrade);
+		
 		if (tradeChoice == 1) {
+			Card* card = tradeArea.trade(toTrade);
 			bool addStatus = player.addToChain(card);
 			//This means we were unable to add a chain
 			if (!addStatus) {
