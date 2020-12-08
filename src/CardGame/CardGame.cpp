@@ -270,6 +270,7 @@ int main()
 			flag = true;
 			break;
 		}
+		table.getPlayerOne() += 1;
 		playPlayer(table.getPlayerOne(), deck, tradeArea, discardPile);
 		displayTable(table);
 		playPlayer(table.getPlayerTwo(), deck, tradeArea, discardPile);
