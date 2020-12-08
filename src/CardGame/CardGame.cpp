@@ -89,12 +89,21 @@ int UserChoice(std::vector<std::string> choices) {
 */
 void playPlayer(Player& player, Deck& deck, TradeArea& tradeArea, DiscardPile& discardPile) {
 	//Player draw
+	player += 3;
 	displayTurn(player.getName());
 	displayPlayer(player);
 	Card* draw = deck.draw();
 	player.addCard(draw);
 	displayCard("You Drew", draw);
 	int choice = 0;
+	if (player.getMaxNumChains() != 3 && player.getNumCoins()>=3) {
+		std::cout << "Would you like to buy a 3rd chain?" << std::endl;
+		choice = UserChoice({ "Yes", "No" });
+		if (choice == 1) {
+			player.buyThirdChain();
+		}
+	}
+	choice = 0;
 	//IF TradeArea is not empty , ++ Cards from Trade Area to Chains or Discard Them
 	if (tradeArea.numCards() > 0) {
 		std::cout << "Cards in Trade Area: " << tradeArea << std::endl;
@@ -175,7 +184,6 @@ void playPlayer(Player& player, Deck& deck, TradeArea& tradeArea, DiscardPile& d
 		choice = UserChoice(player.getHandStrings());
 		lineBreak();
 		discardPile += player.removeCard(choice - 1);
-		player.printHand(std::cout, true);
 		std::cout << std::endl;
 	}
 	for (int i = 0; i < 3; i++) {
@@ -250,17 +258,22 @@ int main()
 	TradeArea& tradeArea = table.getTradeArea();
 	Deck& deck = table.getDeck();
 
-
+	bool flag = false;
+	displayTable(table);
 	while (!table.win(winner)) {
 		int pauseChoice = UserChoice({ "Pause Game", "Continue" });
 		if (pauseChoice == 1) {
 			loader.saveState();
+			flag = true;
 			break;
 		}
-		displayTable(table);
 		playPlayer(table.getPlayerOne(), deck, tradeArea, discardPile);
 		displayTable(table);
 		playPlayer(table.getPlayerTwo(), deck, tradeArea, discardPile);
+		displayTable(table);
+	}
+	if (flag) {
+		return 1;
 	}
 	if (winner.compare(table.getPlayerOne().getName()) == 0) {
 		std::cout << table.getPlayerOne().getName() << " is the winner!";
